@@ -4,19 +4,55 @@
 :sectlinks:
 :doctype: book
 
-A brief introduction of this solution pattern.
+In this Solution Pattern you discover how *Contract First Approach* provides the right framework to acclerate launching new channels in a secure way across internal and external teams to build microservices and APIs based systems.
 
-include::content-overview.adoc[]
 
 [#use-cases]
 == Use cases
 
 Common use cases that can be address with this architecture are:
 
-- xyz
-- xyz
+- API Development
+- Cross-Team Collaboration
+- API Economy
+- Multi-channel digital businesses
 
-include::01-pattern.adoc[]
+== The story behind this solution pattern
 
-== Explore more solution patterns
-include::https://raw.githubusercontent.com/redhat-solution-patterns/redhat-solution-patterns.github.io/master/documentation/modules/ROOT/pages/solution-pattern-list.adoc[]
+This solution pattern extends Globex, a fictitious retail store, which underwent a modernization phase for their retail web application, moving from a legacy monolith to a containerized application. With their growing popularity, Globex would like to add new channels to their existing, web-based e-commerce application.
+
+Globex is working towards launching their own *Globex Mobile App* and  also partnering with other large retail portals. This requires formalizing the application API definitions and exposing the APIs through an API Management solution for consumption by the Globex Mobile App and by Partner Portals.
+
+
+* *Mobile App*
+** Globex would like to launch a mobile application as well in addition to the retail web-site. Globex does not have the necessary expertise in mobile development, so development will have to be outsourced.
+** This means that, the mobile application will also need secure access to the Globex APIs
+
+* Partner Portal
+** Retail partner aggregators would like to showcase Globex's product catalogue on their website
+** To allow for this access, Globex would like to expose an API to allow access to their APIs
+
+
+The new requirements to expand Globex's business by adding additional channels bring its own set of challenges
+
+* Lack of a standardised API format makes it a serious challenge in gaining access the data needed from Globex
+* Launching a  Mobile App is  difficult because it would be tightly coupled with the e-commerce retail application's core services
+* Inter-dependencies between various teams during the dev phase can slow down the dev productivity and time to market.
+* Lack of governance and inadvertent changes to the services can lead to adverse effect on the dev teams
+
+== The Solution
+
+Globex decides to adopt a *Contract First approach* before tackling the development of new services with the API contract being formalized in as OpenAPI specifications.  With *Contract-First*, all the relevant parties including the Globex core team, internal teams, mobile teams, and 3rd party partner aggregators are on the same page before writing the first line of code.  
+
+Once a first version of the *OpenAPI* spec document is ready, it is pushed and managed in a service registry, which acts a the system of truth. Mocks are created for the API so as to enable parallel development streams.
+
+
+Globex uses single sign-on (SSO) capabilities to manage Users, Web apps and APIs. In this case, *OpenID Connect (OIDC)* is used to authenticate a user (Globex Web and Mobile users) and also allow secured access to Globex's APIs.
+
+The APIs are then to be secured and managed by a robust API Management platform. 
+
+In the next sections we will look at the techonolgy choices and a walkthrough of the installation and step-by-step guide to navigate this solution pattern.
+
+=== A graphical representation of the proposed solution:
+
+image::apim_deployment.png[] 

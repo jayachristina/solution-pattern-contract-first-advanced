@@ -1,48 +1,36 @@
-= Solution Pattern: Multi-Channel Contract First Approach
+:toclevels: 2
+:icons: font 
+:sectanchors:
 :sectnums:
-:sectlinks:
-:doctype: book
+:toc: 
 
-= See the Solution in Action
-
-== Demonstration
-
-Include here content related to potential existing demos: blogs, articles, recorded videos, walkthrough guides, tutorials.
-
-== Run the demonstration
-
-=== Before getting started
-To run this demo, you will need xpto. Adding to that, make sure to have:
-
-* ABC
-* XYZ
-* XPTO
-
-=== Installing the demo
-Installation guide and basic test of the demo installation if needed
-
-=== Walkthrough guide
-How to run through the demo
-
-:user_name: {user_name}
-
-In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way across internal and external teams to build microservices and APIs based systems.
+:openshift_cluster_console: %openshift_cluster_console%
+:user_name: %user_name%
+:user_password: %user_password%
+:devspaces_dashboard: %devspaces_dashboard%
+:globex_user_password: %globex_user_password%
+:openshift_subdomain: %openshift_subdomain%
+:3scale_tenant: %3scale_tenant%
+:globex_developer_portal: %globex_developer_portal%
+:sso_tenant_console: %sso_tenant_console%
+:sso_tenant_issuer_url: %sso_tenant_issuer_url%
+:service_registry_url: %service_registry_url%
+:api_designer_url: %api_designer_url%
+:openshift_api_internal: %openshift_api_internal%
 
 
-
-
-:openshift_cluster_console: https://console-openshift-console.%SUBDOMAIN%
-:user_name: user1
-:user_password: openshift
-:devspaces_dashboard: https://devspaces.%SUBDOMAIN%
-:globex_user_password: openshift
-:openshift_subdomain: %SUBDOMAIN%
-:3scale_tenant: https://3scale-user1-admin.%SUBDOMAIN%
-:globex_developer_portal: https://3scale-user1.apps.%SUBDOMAIN%
-:sso_tenant_console: https://sso.%SUBDOMAIN%/auth/admin/globex/console
-:sso_tenant_issuer_url: https://sso.%SUBDOMAIN%/auth/realms/globex-user1
-:service_registry_url: https://service-registry-user1.%SUBDOMAIN%
-:api_designer_url: https://apicurio-designer.%SUBDOMAIN%
+//:openshift_cluster_console: https://console-openshift-console.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
+//:user_name: user1
+//:user_password: openshift
+//:devspaces_dashboard: https://devspaces.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
+//:globex_user_password: openshift
+//:openshift_subdomain: apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
+//:3scale_tenant: https://3scale-user1-admin.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
+//:globex_developer_portal: https://3scale-user1.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
+//:sso_tenant_console: https://sso.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com/auth/admin/globex-user1/console
+//:sso_tenant_issuer_url: https://sso.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com/auth/realms/globex-user1
+//:service_registry_url: https://service-registry-user1.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
+//:api_designer_url: https://apicurio-designer.apps.cluster-jb86t.jb86t.sandbox3028.opentlc.com
 //:openshift_api_internal: https://172.30.0.1:443" 
 
 
@@ -57,6 +45,103 @@ Here is an outline of the activities you will achieve as part of this module.
 image::apim-overview-flowchart.png[]
 
 
+== Setup OpenShift Dev Spaces 
+You are going to use *OpenShift Dev Spaces* for a number of activities. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
+
+=== Section Goals
+* Access OpenShift Dev Spaces as *%user_name%*
+* Ensure you are logged in to OpenShift as *%user_name%* 
+
+=== Instructions
+* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console^, window="console"] to launch the console. If needed login with your username and password (%user_name%/{user_password}).
+
+* On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
++
+.Access Red Hat Devspace
+image::openshift-application-menu-2.png[]
+
+* Login in with your OpenShift credentials (%user_name%/{user_password}). If this is the first time you access Dev Spaces, you have to authorize Dev Spaces to access your account. In the _Authorize Access_ window click on *Allow selected permissions*. 
++
+.Red Hat Devspace - Allow selected permissions
+image::devspace-auth-access.png[width=70%]
+
+* You are directed to the Dev Spaces overview page, which shows the workspaces you have access to. You should see a single workspace, called *cloud-architecture-workshop*. The workspace needs a couple of seconds to start up.
++
+.Red Hat Devspace - cloud-architecture-workshop
+image::devspaces-workspace-starting.png[]
+
+* Click on the *Open* link of the workspace.
++
+.Red Hat Devspace - Open cloud-architecture-workshop
+image::devspaces-workspace-started-1.png[]
+
+* This opens the workspace, which will look pretty familiar if you are used to working with VS Code. Before opening the workspace, a pop-up might appear asking if you trust the contents of the workspace. Click *Yes, I trust the authors* to continue.
++
+.Red Hat Devspace - Agree to trust the authors
+image::devspaces-trust-contents.png[]
+
+* The workspace contains all the resources you are going to use during the workshop. In the project explorer on the left of the workspace, open the *workshop/module-apim* folder as shown in the screenshot below
++
+.Red Hat Devspace - API Module
+image::apim-devspaces.png[] 
+
+* You can deploy the various resources needed in this workshop to the OpenShift cluster directly from Dev Spaces. To do so, you will need access to the built-in *Terminal*. Click on the image:devspaces-menu.png[] icon on the top of the left menu, and select *Terminal -> New Terminal* from the drop-down menu.
++
+.Red Hat Devspace - New terminal
+image::apim-devspaces-menu-new-terminal.png[]
+
+* This opens a terminal in the bottom half of the workspace.
++
+.Red Hat Devspace - Open terminal
+image::apim-devspaces-menu-terminal.png[]
+
+* The OpenShift Dev Spaces environment has access to a plethora of command line tools, including *oc*, the OpenShift command line interface. Through OpenShift Dev Spaces you are automatically logged in into the OpenShift cluster. You can verify this with the command *oc whoami*.
++
+
+[source,bash,role=copy, subs="attributes"]
+----
+oc whoami
+----
++
+
+.Output
+[source, subs="attributes"]
+----
+%user_name%
+----
++
+[IMPORTANT]
+====
+If the output of the `oc whoami` command does not correspond to your username (%user_name%), you need to logout and login again with the correct username.
+
+[source, bash, role=copy, subs="attributes"]
+----
+oc logout
+oc login -u %user_name% -p {user_password} {openshift_api_internal}
+----
+
+====
+
+* You will be working in the `globex-apim-%user_name%` namespace. So run this following command to start using that particular project
+
++
+[source,bash,role=copy, subs="attributes"]
+----
+oc project globex-apim-%user_name%
+----
+
+
++
+.Red Hat Devspace - Verify that you are using the globex-apim-<username> namespace
+image::apim-terminal-setup.png[width=70%]
+
+* Keep this browser tab open because you will referring to draft content, scripts and YAML files for creating objects on OpenShift
+
+=== Scratchpad
+As you work through this Contract First APIs module, there are a few variables and URLs that are needed throughout this activity. To make things easier and manageable we've setup a scratchpad within Dev Spaces. You can fill this scratchpad up with information needed as you are guided below so that you can progress through this activity faster.
+
+{empty} +
+
 == Red Hat SSO - An Introduction
 
 Red Hat SSO is used in this module to both offer single-sign on to Mobile users, and also for securing the APIs. 
@@ -66,7 +151,7 @@ Red Hat SSO is used in this module to both offer single-sign on to Mobile users,
 We will be using OpenID Connect which is an open authentication protocol that works on top of the OAuth 2.0 framework. OIDC offers a discovery mechanism called *OpenID Connect Discovery*, where an OpenID server (here Red Hat SSO based on Keycloak) publishes its metadata at a well-known URL. This URL is typically a collection of various endpoints the server offers, some of which are used in this workshop too.
 ====
 
-* Launch Red Hat SSO by clicking {sso_tenant_console}[SSO Console^,window="sso"] and login using username and password (globex/openshift).
+* Launch Red Hat SSO by clicking {sso_tenant_console}[SSO Console^,window="sso"] and login using username and password (%user_name%/{user_password}).
 * Click on the *OpenID Endpoint Configuration* link to view the *OpenID Provider Configuration* of Red Hat SSO.
 +
 .Red Hat SSO - Logged In
@@ -77,8 +162,8 @@ image::apim-sso-login.png[]
 In case you see an error stating *You don't have access to the requested resource*, you will need to logout, close the browser tab, and login again
 
 * Click on *Sign Out* and close the browser
-* Launch Red Hat SSO by clicking {sso_tenant_console}[SSO Console^,window="sso"] and login using username and password (globex/openshift).
-* Login as *(globex/openshift)*. 
+* Launch Red Hat SSO by clicking {sso_tenant_console}[SSO Console^,window="sso"] and login using username and password (%user_name%/{user_password}).
+* Login as *(%user_name%/{user_password})*. 
 ====
 
 
@@ -95,16 +180,16 @@ image::well-know-openid-configuration.png[]
 
 | *OpenID Provider Configuration (well-known config)*: +
 This URL provides a mechanism to discover the End-User's OpenID Provider and obtain information needed to interact with it, including OpenID/OAuth endpoint locations. The following endpoints is fetched from this URL |
-https://sso.{openshift_subdomain}/auth/realms/globex/.well-known/openid-configuration 
+https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%/.well-known/openid-configuration 
 
 | *issuer*: +
 This value is needed when we need to authorize a user through single sign-on |
 
-https://sso.{openshift_subdomain}/auth/realms/globex
+https://sso.{openshift_subdomain}/auth/realms/globex-%user_name% 
 
 | *token_endpoint* : +
 clients can obtain access tokens from the server using this token endpoint and use these same tokens to access protected resources (APIs in our case) |
-https://sso.{openshift_subdomain}/auth/realms/globex/protocol/openid-connect/token
+https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%/protocol/openid-connect/token
 
 |===
 
@@ -146,8 +231,9 @@ image::api-new-api.png[]
 .API Designer: Clear all content in Source Tab
 image::api-desginer-clear.png[]
 
-* To get the Mobile OpenAPI draft, navigate to the https://github.dev/rh-soln-pattern-contract-first-advanced/workshop-yaml[workshop-yaml repo's GitHub dev view^] .
-* In Dev View, navigate to the folder `module-apim -> mobile -> activedoc`, and open the file `mobile-activedoc-draft.yaml`
+* To get the Mobile OpenAPI draft, navigate to the browser tab with *Dev Spaces* that you have earlier opened. 
+** If you don't have a browser tab open to Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-%user_name%/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password (%user_name%/{user_password}).
+* In Dev Spaces, navigate to the folder `workshop -> module-apim -> mobile -> activedoc`, and open the file `mobile-activedoc-draft.yaml`
 ** Or type [Ctrl+P] and type the file name as `mobile-activedoc-draft.yaml`
 * Copy the entire contents from this file `(Ctrl+A and Ctrl+C)` 
 +
@@ -193,7 +279,7 @@ OpenID Connect
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-https://sso.{openshift_subdomain}/auth/realms/globex/.well-known/openid-configuration
+https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%/.well-known/openid-configuration
 ----
 
 
@@ -264,7 +350,7 @@ Please close the API Designer and Service Registry browser tabs (\^‿^) to avoi
 
 The Mobile API has now been designed by API Designer, and is governed by Red Hat Service Registry. 
 
-Let us fast forward a bit in time, and the backend developers team has built the Mobile Gateway server-side https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway[code^, window="code-samples"] built using Quarkus. This service has been pre-deployed under the `module-apim-{user_name}` namespace on OpenShift. 
+Let us fast forward a bit in time, and the backend developers team has built the Mobile Gateway server-side https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway[code^, window="code-samples"] built using Quarkus. This service has been pre-deployed under the `module-apim-%user_name%` namespace on OpenShift. 
 
 
 In this section you will manage and secure the Mobile Gateway API endpoints so that the Mobile App can access them securely. To create these API endpoints, and secure and manage them, we will need to configure them on 3scale API management. 
@@ -281,7 +367,7 @@ In this section you will manage and secure the Mobile Gateway API endpoints so t
 
 In order to setup OpenID Connect, you will now create a special *client id* meant for *Client Credentials Management*
 
-* Click to launch {sso_tenant_console}[Red Hat SSO^, window="sso"] and login using username and password ({user_name}/{user_password}).
+* Click to launch {sso_tenant_console}[Red Hat SSO^, window="sso"] and login using username and password (%user_name%/{user_password}).
 * Click on *Clients* from the left-hand navigation. And, then click on the *Create* button on the right side as shown below
 
 +
@@ -374,13 +460,13 @@ In this workshop, since both 3scale and the Mobile Gateway run on OpenShift, 3sc
 
 
 * Navigate to the *Dev Spaces browser tab* you have launched at the beginning of this module
-** If this browser tab is not open, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-{user_name}/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"] and login with ({user_name}/{user_password}).
-* Navigate to the folder `module-apim -> mobile -> gateway` and open the `mobile-gateway-backend.yaml` file. (Shortcut: `Ctrl+P > mobile-gateway-backend.yaml`)
+** If this browser tab is not open, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-%user_name%/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"] and login with (%user_name%/{user_password}).
+* Navigate to the folder `workshop -> module-apim -> mobile -> gateway` and open the `mobile-gateway-backend.yaml` file. (Shortcut: `Ctrl+P > mobile-gateway-backend.yaml`)
 * In the file `mobile-gateway-backend.yaml`, update the `<replace-me>` placeholder with the Service endpoint of the Globex Mobile gateway service appended with the port `:8080`. +
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluster.local:8080
+http://globex-mobile-gateway.globex-apim-%user_name%.svc.cluster.local:8080
 ----
 
 .Update mobile-gateway-backend.yaml with Service endpoint of Globex Mobile gateway
@@ -390,14 +476,14 @@ image::mobile-backend-yaml.png[]
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-privateBaseURL: "http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluster.local:8080"
+privateBaseURL: "http://globex-mobile-gateway.globex-apim-%user_name%.svc.cluster.local:8080"
 ----
 +
 .[.underline]#*[Click to know] How to fetch Service URL from OpenShift console?*#
 [%collapsible]
 ====
 
-* Navigate to the `globex-apim-{user_name}` namespace on the OpenShift console by clicking here {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[APIM module on OpenShift^] and login with ({user_name}/{user_password}).
+* Navigate to the `globex-apim-%user_name%` namespace on the OpenShift console by clicking here {openshift_cluster_console}/topology/ns/globex-apim-%user_name%[APIM module on OpenShift^] and login with (%user_name%/{user_password}).
 * In the *Find by name* filter enter the value `mobile-gateway`. The `globex-mobile-gateway` deployment is highlighted. Clicking on this deployment opens the context menu for this deployment
 +
 .Locate globex-mobile-gateway deployment
@@ -410,22 +496,22 @@ image::mobile-gateway-services.png[]
 
 ====
 
-* From the Terminal of Dev Space,s that should be open already, run the following command `oc whoami` to check if you are still logged in as *{user_name}* and `oc project` to see if you are in the project `globex-apim-{user_name}`
-** If you are not in `globex-apim-{user_name}`, run `oc project globex-apim-{user_name}` to login to the right namespace
+* From the Terminal of Dev Space,s that should be open already, run the following command `oc whoami` to check if you are still logged in as *%user_name%* and `oc project` to see if you are in the project `globex-apim-%user_name%`
+** If you are not in `globex-apim-%user_name%`, run `oc project globex-apim-%user_name%` to login to the right namespace
 +
 [source,bash , subs="attributes"]
 .Check logged-in username and project
 ----
 $ oc whoami
-{user_name}
+%user_name%
 $ oc project
-Using project "globex-apim-{user_name}" on server...
+Using project "globex-apim-%user_name%" on server...
 ----
 * Run the following command to create a Mobile Gateway Backend in 3scale.
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/gateway/mobile-gateway-backend.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/gateway/mobile-gateway-backend.yaml -n globex-apim-%user_name%
 ----
 
 * You should see the output as 
@@ -437,7 +523,7 @@ backend.capabilities.3scale.net/globex-mobile-gateway-backend configured
 
 ==== Create 3scale Product for MobileGateway API
 
-* In Dev Spaces in the folder `module-apim -> mobile -> gateway`, open the file `mobile-gateway-product.yaml`. [Shortcut: `Ctr+P > mobile-gateway-product.yaml`]
+* In Dev Spaces in the folder `workshop -> module-apim -> mobile -> gateway`, open the file `mobile-gateway-product.yaml`. [Shortcut: `Ctr+P > mobile-gateway-product.yaml`]
 ** This file creates a 3scale Product, and also attaches the Backend we created in the previous step to the Product.
 * Update the following 2 values as directed below.
 +
@@ -447,7 +533,7 @@ image::mobile-gateway-product.png[]
 +
 [NOTE]
 ====
-If you don't have this value, click on Red Hat  {sso_tenant_console}/#/realms/globex/clients[SSO Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*. You can copy the credentials from the *Credentials tab*
+If you don't have this value, click on Red Hat  {sso_tenant_console}/#/realms/globex-%user_name%/clients[SSO Clients List^, window="sso"]. Login if needed with *(%user_name%/{user_password})*. Click on the Client ID *client-manager*. You can copy the credentials from the *Credentials tab*
 ====
 +
 image::client-manager-credentials.png[]
@@ -455,11 +541,11 @@ image::client-manager-credentials.png[]
 
 [source,bash,role=copy, subs="attributes"]
 ----
-sso.{openshift_subdomain}/auth/realms/globex
+sso.{openshift_subdomain}/auth/realms/globex-%user_name%
 ----
 [NOTE]
 ====
-This URL is from Red Hat SSO's *Issuer endpoint* from https://sso.{openshift_subdomain}/auth/realms/globex/.well-known/openid-configuration[well-known configurations endpoint^]. 
+This URL is from Red Hat SSO's *Issuer endpoint* from https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%/.well-known/openid-configuration[well-known configurations endpoint^]. 
 
 .Red Hat SSO Issuer URL
 
@@ -474,7 +560,7 @@ image::mobile-product-gateway-product-issuerendpoint.png[]
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/gateway/mobile-gateway-product.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/gateway/mobile-gateway-product.yaml -n globex-apim-%user_name%
 ----
 
 * You will the see the following output confirming creation of 3scale Product for Mobile Gateway: 
@@ -486,7 +572,7 @@ product.capabilities.3scale.net/globex-partner-gateway-product created
 
 ==== Create Active Doc for Mobile Gateway
 
-* In Dev Spaces, navigate to the folder `module-apim -> mobile -> activedoc`, open the file `create-mobile-activedoc.yaml`
+* In Dev Spaces, navigate to the folder `workshop -> module-apim -> mobile -> activedoc`, open the file `create-mobile-activedoc.yaml`
 +
 image::mobile-activedoc-yaml.png[width=70%]
 * Replace the `<replace-me>` placeholder with the Service Registry OpenAPI endpoint. This is the same OpenAPI spec that you setup on Service Registry.
@@ -504,7 +590,7 @@ image::mobile-activedoc-create-file.png[]
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/activedoc/create-mobile-activedoc.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/activedoc/create-mobile-activedoc.yaml -n globex-apim-%user_name%
 ----
 +
 .Output
@@ -521,7 +607,7 @@ For the purpose of this workshop let us run a few commands to setup these users 
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/users/mobile-dev-setup.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/users/mobile-dev-setup.yaml -n globex-apim-%user_name%
 ----
 
 * You will see the output as 
@@ -538,7 +624,7 @@ developeruser.capabilities.3scale.net/dev.mobile created
 === View the newly created Backend, Product, ActiveDoc and Users
 ==== View on 3scale admin console
 
-* Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password ({user_name}/{user_password}).
+* Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password (%user_name%/{user_password}).
 +
 .Launch 3scale 
 image::apim-mobile-3scale-login.png[]
@@ -665,7 +751,7 @@ image::apim-devportal-mobile-create-new-app-2.png[width=70%]
 .Update REDIRECT URL in the Application creates successfully for Mobile User
 image::apim-devportal-mobile-app-success.png[width=90%]
 * Copy the *Client ID* from this page which will be used to setup Mobile App
-* In Dev Spaces open the file: *Dev Spaces -> module-apim -> mobile -> mobile-env-patch.sh*
+* In Dev Spaces open the file: *Dev Spaces -> workshop -> module-apim -> mobile -> mobile-env-patch.sh*
 ** Substitute `<replace-me>` found against the `API_CLIENT_ID` variable with the *Client ID* in the previous step
 +
 .Update client_id into mobile-env-patch file
@@ -676,7 +762,7 @@ image::mobile-clientid-env-patch.png[width=70%]
 .Dev Portal: Documentation Page
 image::dev_portal_mobile_doc.png[width=80%]
 ** Copy the URL displayed under "Service Endpoint" in *globex-mobile-gateway-product* box
-** In Dev Spaces navigate back to the open file: *Dev Spaces -> module-apim -> module -> mobile-env-patch.sh*
+** In Dev Spaces navigate back to the open file: *Dev Spaces -> workshop -> module-apim -> module -> mobile-env-patch.sh*
 ** Substitute `<replace-me>` found against the `GLOBEX_MOBILE_GATEWAY` variable with the *Service Endpoint* in the previous step
 +
 .Update GLOBEX_MOBILE_GATEWAY into mobile-env-patch file
@@ -688,8 +774,8 @@ image::mobile-mobgateway-env-patch.png[width=60%]
 |===
 |Field | Value
 
-| SSO_AUTHORITY | \https://sso.{openshift_subdomain}/auth/realms/globex
-| SSO_REDIRECT_LOGOUT_URI | \https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
+| SSO_AUTHORITY | \https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%
+| SSO_REDIRECT_LOGOUT_URI | \https://globex-mobile-globex-apim-%user_name%.{openshift_subdomain}/home
 |===
 +
 .Update SSO details into mobile-env-patch file
@@ -702,7 +788,7 @@ image::mobile-full-env-patch.png[]
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc project globex-apim-{user_name}
+oc project globex-apim-%user_name%
 sh /projects/workshop-devspaces/workshop/module-apim/mobile/mobile-env-patch.sh
 ----
 +
@@ -711,7 +797,7 @@ sh /projects/workshop-devspaces/workshop/module-apim/mobile/mobile-env-patch.sh
 ----
 deployment.apps/globex-mobile updated
 ----
-* The Mobile App Deployment is patched with the necessary variables. You can view this navigating to {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/deployments/globex-mobile/environment[globex-mobile deployment, window="console"]
+* The Mobile App Deployment is patched with the necessary variables. You can view this navigating to {openshift_cluster_console}/k8s/ns/globex-apim-%user_name%/deployments/globex-mobile/environment[globex-mobile deployment, window="console"]
 +
 .globex-mobile deployment on OpenShift
 image::apim_globex_mobile_deployment.png[]
@@ -719,7 +805,7 @@ image::apim_globex_mobile_deployment.png[]
 ==== Update Red Hat SSO's Web Origin to match Mobile App
 There is one last step that you need to do before trying out the Mobile App. You need to update the *Web Origin*
 
-* Navigate to click on {sso_tenant_console}/#/realms/globex/clients[Red Hat SSO Clients List^,window="sso"]. Login if needed with *({user_name}/{user_password})*.
+* Navigate to click on {sso_tenant_console}/#/realms/globex-%user_name%/clients[Red Hat SSO Clients List^,window="sso"]. Login if needed with *(%user_name%/{user_password})*.
 +
 .Red Hat SSO Clients List for Mobile client
 image::rh-sso-mobile-client.png[]
@@ -742,7 +828,7 @@ image::mobile-dev-portal-clientid.png[]
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}
+https://globex-mobile-globex-apim-%user_name%.{openshift_subdomain}
 ----
 +
 .Update Web Origin in Red Hat SSO's new Client ID, and click on Save.
@@ -768,9 +854,9 @@ The Mobile Application can be access via this QR Code as well as via browser
 * Scan the following QR Code with your mobile phone
 +
 .Scan to view Mobile App
-image::https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl=https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile,200,300]
+image::https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl=https://globex-mobile-globex-apim-%user_name%.{openshift_subdomain}[Globex Mobile,200,300]
  
-* Alternatively, launch https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^] and login using (asilva/openshift)
+* Alternatively, launch https://globex-mobile-globex-apim-%user_name%.{openshift_subdomain}[Globex Mobile^] and login using (asilva/openshift)
 * The login process may take a few seconds. Please wait for bit :)
 +
 .User is logged in
@@ -832,8 +918,8 @@ Since we've gone through the Design and Governance sections of the Mobile API, i
 
 === Publish Partner API to Service Registry
 
-* If you don't have a browser tab open with OpenShift Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-{user_name}/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password ({user_name}/{user_password}).
-* In Dev Spaces, navigate to the folder `module-apim -> partner -> activedoc`, and open the file `partner-activedoc-draft.json`. 
+* If you don't have a browser tab open with OpenShift Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-%user_name%/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password (%user_name%/{user_password}).
+* In Dev Spaces, navigate to the folder `workshop -> module-apim -> partner -> activedoc`, and open the file `partner-activedoc-draft.json`. 
 ** Or type [Ctrl+P] and type the file name as `partner-activedoc-draft.json`
 * Scroll to the bottom of the page where you can see the *securitySchemes* section
 +
@@ -843,7 +929,7 @@ image::partner-api-securty-scheme.png[]
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-https://sso.{openshift_subdomain}/auth/realms/globex/.well-known/openid-configuration 
+https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%/.well-known/openid-configuration 
 ----
 +
 .Updated Security Scheme
@@ -867,12 +953,12 @@ curl -X POST -H "Content-type: application/json; artifactType=OPENAPI" -H "X-Reg
 === Create Backend, Products, ActiveDoc and Users for Partner Gateway
 
 ==== Create Backend
-* In Dev Spaces , under the folder `module-apim -> partners -> gateway`, open the file `partner-gateway-backend.yaml`
+* In Dev Spaces , under the folder `workshop -> module-apim -> partners -> gateway`, open the file `partner-gateway-backend.yaml`
 * Substitute *"<replace-me>"* with the Service endpoint of the Globex Partner gateway service appended with the port as `:8080`. This URL is given below 
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-http://globex-partner-gateway.globex-apim-{user_name}.svc.cluster.local:8080
+http://globex-partner-gateway.globex-apim-%user_name%.svc.cluster.local:8080
 ----
 * After substitution the *partner-gateway-backend.yaml* file should looks like 
 +
@@ -882,7 +968,7 @@ image::partner-gateway-backend.png[width=80%]
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-backend.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-backend.yaml -n globex-apim-%user_name%
 ----
 .Output
 ----
@@ -890,23 +976,23 @@ backend.capabilities.3scale.net/globex-partner-gateway-backend created
 ----
 
 ==== Create Products
-* In Dev Spaces , under the folder `module-apim -> partners -> gateway`, open the file `partner-gateway-product.yaml`
+* In Dev Spaces , under the folder `workshop -> module-apim -> partners -> gateway`, open the file `partner-gateway-product.yaml`
 
 +
 .partner-gateway-product.yaml file
 image::partner-gateway-product.png[width=80%]
 
 * Get the value for *<client-credentials>* placeholder as described below. Or if you have copied this into Scratchpad you can use that instead.
-** Open the {sso_tenant_console}/#/realms/globex/clients[SSO Clients List^, window="sso"] from Red Hat SSO.
-** Login if needed with *({user_name}/{user_password})*. 
+** Open the {sso_tenant_console}/#/realms/globex-%user_name%/clients[SSO Clients List^, window="sso"] from Red Hat SSO.
+** Login if needed with *(%user_name%/{user_password})*. 
 
 [WARNING]
 ====
-In case you see an error stating *You don't have access to the requested resource*, you may notice that you are logged in as a user other than *{user_name}* 
+In case you see an error stating *You don't have access to the requested resource*, you may notice that you are logged in as a user other than *%user_name%* 
 
 * Click on *Sign Out* and close the browser
-* Reopen the {sso_tenant_console}/#/realms/globex/clients[Red Hat SSO Clients List^, window="sso"]. 
-* Login as *({user_name}/{user_password})*. 
+* Reopen the {sso_tenant_console}/#/realms/globex-%user_name%/clients[Red Hat SSO Clients List^, window="sso"]. 
+* Login as *(%user_name%/{user_password})*. 
 
 
 .Red Hat SSO Login error
@@ -926,7 +1012,7 @@ image::client-manager-credentials.png[]
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-sso.{openshift_subdomain}/auth/realms/globex
+sso.{openshift_subdomain}/auth/realms/globex-%user_name%
 ----
 
 * The file `partner-gateway-product.yaml` looks like this now.
@@ -937,7 +1023,7 @@ image::product-gateway-product-issuerendpoint.png[]
 +
 [source,bash,role=copy, subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-product.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-product.yaml -n globex-apim-%user_name%
 ----
 
 .Output
@@ -946,7 +1032,7 @@ product.capabilities.3scale.net/globex-partner-gateway-product created
 ----
 
 === Create Active Doc for Partner Gateway
-* In Dev Spaces, navigate to the folder `module-apim -> partners -> activedoc`, open the file `create-partner-activedoc.yaml`
+* In Dev Spaces, navigate to the folder `workshop -> module-apim -> partners -> activedoc`, open the file `create-partner-activedoc.yaml`
 +
 image::mobile-activedoc-yaml.png[width=70%]
 * Replace the `<replace-me>` placeholder with the Service Registry OpenAPI endpoint for Partner API show below
@@ -961,7 +1047,7 @@ image::mobile-activedoc-yaml.png[width=70%]
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/activedoc/create-partner-activedoc.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/activedoc/create-partner-activedoc.yaml -n globex-apim-%user_name%
 ----
 +
 .Output
@@ -975,7 +1061,7 @@ activedoc.capabilities.3scale.net/partner-gateway-activedoc created
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/users/partner-dev-setup.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/users/partner-dev-setup.yaml -n globex-apim-%user_name%
 ----
 +
 .Output
@@ -988,7 +1074,7 @@ developeruser.capabilities.3scale.net/user.partner created
 
 === Configurations on 3scale admin console
 
-* Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password ({user_name}/{user_password}).
+* Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password (%user_name%/{user_password}).
 +
 .Launch 3scale 
 image::apim-partner-3scale-login.png[]
@@ -1049,7 +1135,7 @@ image::apim-devportal-partner-app-success.png[width=70%]
 ** *Client ID & Client Secret* - Needs to be fetched from Red Hat SSO
 ** *Token URL* - From Red Hat SSO - But available here in the instructions
 ** *Globex API Endpoint* - From Red Hat 3scale - But available here in the instructions
-* These values are part of {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/deployments/globex-partner-web/environment[globex-partner-web deployment, window="console"] and are highlighted in the screenshot below
+* These values are part of {openshift_cluster_console}/k8s/ns/globex-apim-%user_name%/deployments/globex-partner-web/environment[globex-partner-web deployment, window="console"] and are highlighted in the screenshot below
 +
 .globex-partner-web Deployment
 image::partner-web-deployment-env.png[]
@@ -1071,14 +1157,14 @@ image::apim-devportal-partner-clientid.png[width=70%]
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-https://sso.{openshift_subdomain}/auth/realms/globex/protocol/openid-connect/token
+https://sso.{openshift_subdomain}/auth/realms/globex-%user_name%/protocol/openid-connect/token
 ----
 
 * In the *Dev Spaces Terminal* apply changes made to the *secret.yaml* by running the following command
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/partner-web/secret.yaml -n globex-apim-{user_name}
+oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/partner-web/secret.yaml -n globex-apim-%user_name%
 ----
 +
 .Output
@@ -1091,7 +1177,7 @@ secret/globex-partner-web configured
 +
 [source,bash,role=copy,subs="attributes"]
 ----
-oc set env deployments/globex-partner-web --overwrite GLOBEX_PARTNER_GATEWAY=https://globex-partner-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}
+oc set env deployments/globex-partner-web --overwrite GLOBEX_PARTNER_GATEWAY=https://globex-partner-gateway-product-3scale-%user_name%-apicast-production.{openshift_subdomain}
 ----
 +
 [source,subs="attributes"]
@@ -1104,11 +1190,11 @@ deployment.apps/globex-partner-web updated
 [%collapsible]
 ====
 
-* Ensure the {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/deployments/globex-partner-web/environment[globex-partner-web deployment, window="console"] looks like this now
+* Ensure the {openshift_cluster_console}/k8s/ns/globex-apim-%user_name%/deployments/globex-partner-web/environment[globex-partner-web deployment, window="console"] looks like this now
 +
 .Partner Web Portal Deployment Values
 image::globex-partner-web-filled.png[]
-* To check the Secret that you updated, you can navigate to {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/secrets/globex-partner-web[globex-partner-web secret^, window="console"]. Scroll down to the *Data* section, and click on *Reveal values*
+* To check the Secret that you updated, you can navigate to {openshift_cluster_console}/k8s/ns/globex-apim-%user_name%/secrets/globex-partner-web[globex-partner-web secret^, window="console"]. Scroll down to the *Data* section, and click on *Reveal values*
 +
 .Partner Web Portal Secret with SSO details
 image::partner-web-secret.png[]
@@ -1120,7 +1206,7 @@ image::partner-web-secret.png[]
 In the previous section, you signed up for access as a Partner Developer and gained credentials to access the Globex PArtner Gateway API. You also setup the necessary configurations for the Partner Web Application.
 
 
-* Launch the https://globex-partner-web-globex-apim-{user_name}.{openshift_subdomain}[Globex Partner Web^]
+* Launch the https://globex-partner-web-globex-apim-%user_name%.{openshift_subdomain}[Globex Partner Web^]
 +
 .Partner Web Portal
 image::partner_web_portal.png[]

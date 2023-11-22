@@ -1,31 +1,24 @@
-= Solution Pattern: Name Template
-:sectnums:
-:sectlinks:
-:doctype: book
+:user_name: {user_name}
 
-= Architecture 
+In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way across internal and external teams to build microservices and APIs based systems.
 
-Introduction for the architecture of this solution pattern.
+== Business context
 
-[#tech_stack]
-== Technology Stack
-
-// Change links and text here as you see fit.
-=== Red Hat supported technologies
-* https://www.redhat.com/en/technologies/cloud-computing/openshift[Red Hat OpenShift^]
-* https://www.redhat.com/en/products/application-foundations[Red Hat Application Foundations^]
-** https://access.redhat.com/products/quarkus[Quarkus^]
-** https://www.redhat.com/en/technologies/jboss-middleware/3scale[3scale]
-** https://access.redhat.com/documentation/en-us/red_hat_build_of_apicurio_registry[Red Hat build of Apicurio Registry^]
-
-=== Complementary open source technologies
-** https://microcks.io/[Microcks]
-** https://www.postgresql.org/[PostgreSQL database]
-** https://helm.sh/[Helm]
+As mentioned in the introduction module of the workshop, Globex went through a modernization phase for their retail web application, moving from a legacy monolith to a containerized application. With their growing popularity, Globex would like to add new channels to their existing, web-based e-commerce application.
 
 
-[#in_depth]
-== An in-depth look at the solution's architecture
+They are working towards launching their own *Globex Mobile App* and  partnering with other large retail portals. This requires formalizing the application API definitions and exposing the APIs through a API Management solution for consumption by the Globex Mobile App and by Partner Portals.
+
+
+*(a) Mobile App*
+
+* Globex would like to launch a mobile application as well in addition to the retail web-site. Globex does not have the necessary expertise in mobile development, so development will have to be outsourced.
+* This means that, the mobile application will also need secure access to the Globex APIs
+
+*(b) Partner Portal*
+
+* Retail partner aggregators would like to showcase Globex's product catalogue on their website
+* To allow for this access, Globex would like to expose an API to allow access to their APIs
 
 
 
@@ -107,9 +100,6 @@ For the first iteration, the Mobile App is built using Angular + NodeJS. This ap
 
 image::apim_deployment.png[] 
 
+== Implementation
 
-
-[#more_tech]
-== About the Technology Stack
-
-If you want to include more details about the tech stack you used, this is the place.
+In the next chapter, you will be guided through the implementation and deployment of the Contract First Approach. Of course this entails way more than can be achieved during a workshop, so instead most components are already in place, and you will focus on a number of key activities to deploy and run the solution.
