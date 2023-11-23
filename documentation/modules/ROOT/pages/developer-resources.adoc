@@ -1,0 +1,7 @@
+== Developer Resources
+
+Learn more about the technologies you have seen here
+
+* link:https://developers.redhat.com/about[Register^] for Red Hat developers subscription to get access to Red Hat products for personal use at no cost +
+* link:https://developers.redhat.com/products/openshift/overview[ Red Hat OpenShift^] +
+* link:https://developers.redhat.com/products/quarkus/overview[ Quarkus^] + 
