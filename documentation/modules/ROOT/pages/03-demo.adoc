@@ -770,11 +770,10 @@ As part of this workshop, you will use a mobile-friendly Angular App and not a m
 
 // The Mobile Application can be access via this QR Code as well as via browser
 
-// * Scan the following QR Code with your mobile phone
-// image::https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl={qrurl}[Globex Mobile,200,300]
-// Alternatively, 
+* Open this https://chart.googleapis.com/chart?cht=qr&chl=https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}&chs=200x200[QR Code Link^] to view the QR Code and scan using your mobile phone to access the Mobile App
 
-* Launch https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^] and login using (asilva/openshift)
+* Alternatively, open this URL in *Incognito Mode* to view https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^]. This is to ensure that there is no clash with previous logins to RH-SSO.
+* Click on Login, and login using `(asilva/openshift)`
 * The login process may take a few seconds. Please wait for bit :)
 +
 .User is logged in
