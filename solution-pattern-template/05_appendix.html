@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
-    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/04-workshop.html">
+    <title>Untitled :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/05_appendix.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -237,39 +237,143 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">Contract First approach - Advanced with OIDC</a></li>
-    <li><a href="04-workshop.html">Solution Pattern: Name Template</a></li>
-  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/jayachristina/solution-pattern-contract-first-advanced/edit/main/documentation/modules/ROOT/pages/04-workshop.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/solution-pattern-contract-first-advanced/edit/main/documentation/modules/ROOT/pages/05_appendix.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Solution Pattern: Name Template</h1>
-<h1 id="_workshop" class="sect0"><a class="anchor" href="#_workshop"></a><a class="link" href="#_workshop">Workshop</a></h1>
-<div class="openblock partintro">
+<div class="sect2">
+<h3 id="_what_are_backend_product_activedocs_and_crds"><a class="anchor" href="#_what_are_backend_product_activedocs_and_crds"></a>What are Backend, Product, ActiveDocs and CRDs?</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Backends</strong> are Internal APIs which are then bundled into a 3scale Product.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>it contains at least the URL of the API</p>
+</li>
+<li>
+<p>It can optionally be configured with mapping rules, methods and metrics to facilitate reusability.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Products</strong> are the Customer-facing APIs.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>It defines the application plans, and configure APIcast</p>
+</li>
+<li>
+<p>You can create API documentation by attaching the Mobile OpenAPI schema as a <strong>3scale ActiveDoc</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>ActiveDocs</strong> are interactive documentation for your API offered as a framework by 3scale.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>With Swagger 2.0 (based on the Swagger Spec) this provides a functional, attractive documentation for the API, which will help developers to explore, to test and integrate with the APIs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A CRD file allows you to define your own object kinds (Backend, API, ActiveDoc etc) and lets the API Server handle the entire lifecycle of the objects.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_is_a_service"><a class="anchor" href="#_what_is_a_service"></a>What is a Service</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>In OpenShift, a Kubernetes Service serves as an internal load balancer and identifies pods which in turn have the applications. If the application needs to be accessed from outside of OpenShift, you will need OpenShift routes.</p>
+</li>
+<li>
+<p>In this workshop, since both 3scale and the Mobile Gateway run on OpenShift, 3scale will proxy requests to the backend using Services. This also means the backend cannot be accessed directly from outside OpenShift.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_where_do_i_find_this_client_id"><a class="anchor" href="#_where_do_i_find_this_client_id"></a>Where do I find this Client ID?</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the {globex_developer_portal}/admin/applications[Globex Developer Portal Applications^, window="devportal"]</p>
+</li>
+<li>
+<p>The client ID is displayed against the <code>globex-mobile-gateway-product</code> product.</p>
+<div class="imageblock">
 <div class="content">
-what is this workshop and what will be learned
+<img src="_images/mobile-dev-portal-clientid.png" alt="mobile dev portal clientid">
+</div>
+<div class="title">Figure 1. globex-mobile deployment on OpenShift</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_installing_the_workshop_environment"><a class="anchor" href="#_installing_the_workshop_environment"></a><a class="link" href="#_installing_the_workshop_environment">1. Installing the workshop environment</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_before_getting_started"><a class="anchor" href="#_before_getting_started"></a><a class="link" href="#_before_getting_started">1.1. Before getting started</a></h3>
-
+<div class="sect3">
+<h4 id="_how_do_i_verify_what_i_just_did"><a class="anchor" href="#_how_do_i_verify_what_i_just_did"></a>How do I verify what I just did?</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure the {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/deployments/globex-partner-web/environment[globex-partner-web deployment, window="console"] looks like this now</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/globex-partner-web-filled.png" alt="globex partner web filled">
 </div>
-<div class="sect2">
-<h3 id="_installing_the_environment"><a class="anchor" href="#_installing_the_environment"></a><a class="link" href="#_installing_the_environment">1.2. Installing the environment</a></h3>
-
+<div class="title">Figure 2. Partner Web Portal Deployment Values</div>
+</div>
+</li>
+<li>
+<p>To check the Secret that you updated, you can navigate to {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/secrets/globex-partner-web[globex-partner-web secret^, window="console"]. Scroll down to the <strong>Data</strong> section, and click on <strong>Reveal values</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-web-secret.png" alt="partner web secret">
+</div>
+<div class="title">Figure 3. Partner Web Portal Secret with SSO details</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_how_to_fetch_service_url_from_openshift_console"><a class="anchor" href="#_how_to_fetch_service_url_from_openshift_console"></a>How to fetch Service URL from OpenShift console?</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the <code>globex-apim-{user_name}</code> namespace on the OpenShift console by clicking here {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[APIM module on OpenShift^] and login with ({user_name}/{user_password}).</p>
+</li>
+<li>
+<p>In the <strong>Find by name</strong> filter enter the value <code>mobile-gateway</code>. The <code>globex-mobile-gateway</code> deployment is highlighted. Clicking on this deployment opens the context menu for this deployment</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/globex-mobile-gateway-deplpyment.png" alt="globex mobile gateway deplpyment">
 </div>
-<div class="sect1">
-<h2 id="_delivering_the_workshop"><a class="anchor" href="#_delivering_the_workshop"></a><a class="link" href="#_delivering_the_workshop">2. Delivering the workshop</a></h2>
-<div class="sectionbody">
-
+<div class="title">Figure 4. Locate globex-mobile-gateway deployment</div>
+</div>
+</li>
+<li>
+<p>Under <strong>Services</strong> section you can see the name of the services assocated with this deployment. Click on the <code>globex-mobile-gateway</code> link and you will be taken to the Services page.</p>
+</li>
+<li>
+<p>Under <strong>Service routing &#8594; Hostname</strong>, you can find the service&#8217;s hostname. Make a note of this URL and you will need this to create the Backend on 3scale.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-gateway-services.png" alt="mobile gateway services">
+</div>
+<div class="title">Figure 5. Mobile Gateway Service in OpenShift</div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </article>

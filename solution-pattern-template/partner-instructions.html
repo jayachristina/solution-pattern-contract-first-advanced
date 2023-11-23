@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/partner-instructions.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TW8CJFT3N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9TW8CJFT3N');
+</script>
+<!-- Google tag (gtag.js) -->
+
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('USERID');
+      const subdomain = urlParams.get('SUBDOMAIN'); 
+      if (userId) {
+        showUserId( userId, subdomain);
+      }
+      else {
+        showUserIdForm(subdomain);
+      }
+    } );
+
+
+    function showUserId( userId, subdomain) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('userIdDisplay').textContent = "User ID : " + userId;
+      document.getElementById('subdomainDisplay').textContent = "Subdomain : " + subdomain; 
+    }
+
+    function showUserIdForm( subdomain ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+      document.getElementById('subdomain').value = subdomain; 
+
+    }
+
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubdomainInput = document.getElementById('subdomain');
+      window.location.search = ('&USERID=' + elUserIdInput.value  + '&SUBDOMAIN=' + elSubdomainInput.value);
+    }
+
+    function recycle() {
+      document.getElementById('userId').value='';
+      document.getElementById('subdomain').value='';
+      window.location.search = ('');
+    }
+
+
+  </script>
+  <nav class="navbar">
+   <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white" href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+      </button>
+      
+    </div>
+    <div class="navbar-item" ><span class="navbar-text" style="color: white; margin-left: 1rem; margin-right: 1rem;">|</span></div>
+    
+    <div class="navbar-item has-dropdown is-hoverable" >
+      <a class="navbar-link" href="#" style="color: white">Red Hat Patterns</a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+        <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank">Solution Patterns </a>
+        <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
+
+      </div>
+    </div>
+    <div class="navbar-item has-dropdown is-hoverable" >
+      <a class="navbar-link" href="#" style="color: white">Resources</a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+        <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+      </div>
+    </div>
+
+    <div class="navbar-item" ><span class="navbar-text" style="color: white; margin-left: 1rem; margin-right: 1rem;">|</span></div>
+
+
+    
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        
+
+
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 2rem;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+            Your Workshop Environment
+
+          <form action="javascript:void(0);" onsu>
+            <input size="20" id="userId" type="text" placeholder="USER ID">
+            <input size="20" id="subdomain" type="text" placeholder="Subdomain">
+            <button type="hidden" onclick="goWithUserId();">Set</button>
+          </form>
+        </div>
+        
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 2rem;">
+          <span class="navbar-text " style="margin-left: 1rem; margin-right: 1rem; float:left">
+            &nbsp;Your Workshop Environment <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i alt="Clear details" title="Clear details" onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i>
+
+          <br><span  id="userIdDisplay"></span> <span  style="color: white; margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span id="subdomainDisplay"></span>
+        </div>
+
+        
+        </span>
+
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="solution-pattern-template" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">Contract First approach - Advanced with OIDC</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">1. Home page</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#use-cases">1.1 Use cases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#01-pattern.adoc#_the_story_behind_this_solution_pattern">1.2 The story behind this solution pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#01-pattern.adoc#_the_solution">1.3 The solution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_content_overview">1.4 Content Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#_content_overview">1.5 Explore more solution patterns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-architecture.html">2. Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#tech_stack">2.1. Technology stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#in_depth">2.2. An in-depth look at the solution&#8217;s architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-architecture.html#tech_stack">2.3. More about the technology stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-demo.html">3. Solution in Action</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-demo.html#_demonstration">3.1. Demonstration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-demo.html#_run_the_demonstration">3.2. Run this demonstration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="03-demo.html#_before_getting_started">3.3. Pre-requisites</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="03-demo.html#_installing_the_demo">3.4. Installing the demo</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="03-demo.html#_walkthrough_guide">3.5. Walkthrough guide</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-resources.html">4. Developer Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#05-appendix.adoc">5. Appendix</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://redhat-solution-patterns.github.io/">Other Red Hat Solution Patterns</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Contract First approach - Advanced with OIDC</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Contract First approach - Advanced with OIDC</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/solution-pattern-contract-first-advanced/edit/main/documentation/modules/ROOT/pages/partner-instructions.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_setup_partner_gateway_and_partner_web_app_optional"><a class="anchor" href="#_setup_partner_gateway_and_partner_web_app_optional"></a>Setup Partner Gateway and Partner Web App (Optional)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before we start this section, close all the browser tabs except for this browser tab. This will help you navigate this section more easily.</p>
+</div>
+<div class="paragraph">
+<p>Since we&#8217;ve gone through the Design and Governance sections of the Mobile API, in this section we will skip the design section. We&#8217;ll also keep discussions to only essentials :)</p>
+</div>
+<div class="sect2">
+<h3 id="_publish_partner_api_to_service_registry"><a class="anchor" href="#_publish_partner_api_to_service_registry"></a>Publish Partner API to Service Registry</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>If you don&#8217;t have a browser tab open with OpenShift Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-{user_name}/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password ({user_name}/{user_password}).</p>
+</li>
+<li>
+<p>In Dev Spaces, navigate to the folder <code>module-apim &#8594; partner &#8594; activedoc</code>, and open the file <code>partner-activedoc-draft.json</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Or type [Ctrl+P] and type the file name as <code>partner-activedoc-draft.json</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Scroll to the bottom of the page where you can see the <strong>securitySchemes</strong> section</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-api-securty-scheme.png" alt="partner api securty scheme">
+</div>
+<div class="title">Figure 1. Partner OpenAPI Security Schemes section</div>
+</div>
+</li>
+<li>
+<p>Substitute <strong>&lt;replace-me&gt;</strong> with the Red Hat SSO&#8217;s OpenID Provider Configuration shown below</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://sso.{openshift_subdomain}/auth/realms/globex/.well-known/openid-configuration</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-sec-scheme-updated.png" alt="partner sec scheme updated">
+</div>
+<div class="title">Figure 2. Updated Security Scheme</div>
+</div>
+</li>
+<li>
+<p>Execute the following command from the Dev Spaces' Terminal.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This command makes a POST to the Service Registry API to create an OpenAPI schema for Partner Gateway API.</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -X POST -H "Content-type: application/json; artifactType=OPENAPI" -H "X-Registry-ArtifactId: partnerapi" -d @/projects/workshop-devspaces/workshop/module-apim/partners/activedoc/partner-activedoc-draft.json {service_registry_url}/apis/registry/v2/groups/globex/artifacts</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The following JSON is returned back by Service Registry confirming creation</p>
+<div class="listingblock">
+<div class="title">Output response from Service Registry</div>
+<div class="content">
+<pre>{"name":"Globex Partners API Gateway","description":"Globex APIs made accessible to global partners to view Globex's catalog and products","createdBy":"","createdOn":"2023-05-05T22:51:01+0000","modifiedBy":"","modifiedOn":"2023-05-05T22:51:01+0000","id":"partnerapi","version":"1","type":"OPENAPI","globalId":2,"state":"ENABLED","groupId":"globex","contentId":2,"references":[]}workshop-devspaces (main)</pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can view the newly created OpenAPI specification {service_registry_url}/ui/artifacts/globex/partnerapi/versions/latest[here^, window="serviceregistry"]</p>
+<div class="ulist">
+<ul>
+<li>
+<p>You can close the Service Registry browser tab.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_backend_products_activedoc_and_users_for_partner_gateway"><a class="anchor" href="#_create_backend_products_activedoc_and_users_for_partner_gateway"></a>Create Backend, Products, ActiveDoc and Users for Partner Gateway</h3>
+<div class="sect3">
+<h4 id="_create_backend"><a class="anchor" href="#_create_backend"></a>Create Backend</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>In Dev Spaces , under the folder <code>module-apim &#8594; partners &#8594; gateway</code>, open the file <code>partner-gateway-backend.yaml</code></p>
+</li>
+<li>
+<p>Substitute <strong>"&lt;replace-me&gt;"</strong> with the Service endpoint of the Globex Partner gateway service appended with the port as <code>:8080</code>. This URL is given below</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://globex-partner-gateway.globex-apim-{user_name}.svc.cluster.local:8080</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>After substitution the <strong>partner-gateway-backend.yaml</strong> file should looks like</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-gateway-backend.png" alt="partner gateway backend" width="80%">
+</div>
+<div class="title">Figure 3. partner-gateway-backend file</div>
+</div>
+</li>
+<li>
+<p>Run the following command which will create a Partner Gateway Backend in 3scale.</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-backend.yaml -n globex-apim-{user_name}</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>backend.capabilities.3scale.net/globex-partner-gateway-backend created</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_products"><a class="anchor" href="#_create_products"></a>Create Products</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>In Dev Spaces , under the folder <code>module-apim &#8594; partners &#8594; gateway</code>, open the file <code>partner-gateway-product.yaml</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-gateway-product.png" alt="partner gateway product" width="80%">
+</div>
+<div class="title">Figure 4. partner-gateway-product.yaml file</div>
+</div>
+</li>
+<li>
+<p>Get the value for <strong>&lt;client-credentials&gt;</strong> placeholder as described below. Or if you have copied this into Scratchpad you can use that instead.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the {sso_tenant_console}/#/realms/globex/clients[SSO Clients List^, window="sso"] from Red Hat SSO.</p>
+</li>
+<li>
+<p>Login if needed with <strong>({user_name}/{user_password})</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In case you see an error stating <strong>You don&#8217;t have access to the requested resource</strong>, you may notice that you are logged in as a user other than <strong>{user_name}</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on <strong>Sign Out</strong> and close the browser</p>
+</li>
+<li>
+<p>Reopen the {sso_tenant_console}/#/realms/globex/clients[Red Hat SSO Clients List^, window="sso"].</p>
+</li>
+<li>
+<p>Login as <strong>({user_name}/{user_password})</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sso-login-error.png" alt="sso login error">
+</div>
+<div class="title">Figure 5. Red Hat SSO Login error</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on the Client ID <strong>client-manager</strong>. You can copy the credentials from the <strong>Credentials tab</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-manager-credentials.png" alt="client manager credentials">
+</div>
+<div class="title">Figure 6. client_manager credentials</div>
+</div>
+</li>
+<li>
+<p>In the <strong>partner-gateway-product.yaml</strong> file, in Dev Spaces, substitute the following values</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Substitute <strong>&lt;client-credentials&gt;</strong>  with the Secret from the Client ID <strong>client-manager</strong> from the previous step</p>
+</li>
+<li>
+<p>Substitute <strong>&lt;issuerEndpoint&gt;</strong> with the following value</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sso.{openshift_subdomain}/auth/realms/globex</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The file <code>partner-gateway-product.yaml</code> looks like this now.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/product-gateway-product-issuerendpoint.png" alt="product gateway product issuerendpoint">
+</div>
+</div>
+</li>
+<li>
+<p>Run the following command in the Dev Spaces Terminal to create the product</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-product.yaml -n globex-apim-{user_name}</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Output</div>
+<div class="content">
+<pre>product.capabilities.3scale.net/globex-partner-gateway-product created</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_active_doc_for_partner_gateway"><a class="anchor" href="#_create_active_doc_for_partner_gateway"></a>Create Active Doc for Partner Gateway</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>In Dev Spaces, navigate to the folder <code>module-apim &#8594; partners &#8594; activedoc</code>, open the file <code>create-partner-activedoc.yaml</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-activedoc-yaml.png" alt="mobile activedoc yaml" width="70%">
+</div>
+</div>
+</li>
+<li>
+<p>Replace the <code>&lt;replace-me&gt;</code> placeholder with the Service Registry OpenAPI endpoint for Partner API show below</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{service_registry_url}/apis/registry/v2/groups/globex/artifacts/partnerapi</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create this Active Doc by running the following command in the Dev Spaces Terminal</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/activedoc/create-partner-activedoc.yaml -n globex-apim-{user_name}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Output</div>
+<div class="content">
+<pre>activedoc.capabilities.3scale.net/partner-gateway-activedoc created</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_partner_users"><a class="anchor" href="#_setup_partner_users"></a>Setup Partner users</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Create this Active Doc by running the following command in the Dev Spaces Terminal</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/users/partner-dev-setup.yaml -n globex-apim-{user_name}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Output</div>
+<div class="content">
+<pre>secret/partner.secret created
+developeraccount.capabilities.3scale.net/partner-developeraccount created
+developeruser.capabilities.3scale.net/admin.partner created
+developeruser.capabilities.3scale.net/user.partner created</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configurations_on_3scale_admin_console"><a class="anchor" href="#_configurations_on_3scale_admin_console"></a>Configurations on 3scale admin console</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password ({user_name}/{user_password}).</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-partner-3scale-login.png" alt="apim partner 3scale login">
+</div>
+<div class="title">Figure 7. Launch 3scale</div>
+</div>
+</li>
+<li>
+<p>You will notice that the Partner Product and Backend have been created.</p>
+</li>
+<li>
+<p>Click on <strong>globex-partner-gateway-product</strong> under <strong>APIs &#8594; Products</strong> section.</p>
+</li>
+<li>
+<p>You are presented with the Product overview page for the Partner API Product you created.</p>
+</li>
+<li>
+<p>Navigate to <code>Integration &#8594; Configuration</code> and click on the <strong>Promote to v.x Staging APICast</strong> and then <strong>Promote to v.x Production APICast</strong> to promote all the config changes</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-promote-apicast.png" alt="partner promote apicast">
+</div>
+<div class="title">Figure 8. Promote Staging and Production APICast</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_signup_for_an_application_as_a_partner"><a class="anchor" href="#_signup_for_an_application_as_a_partner"></a>Signup for an application as a Partner</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the Developer Portal {globex_developer_portal}[Globex Developer Portal^, window="devportal"]</p>
+</li>
+<li>
+<p>If you are already signed in, clicking on the Exit option on top-right of the page.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/logout.png" alt="logout" width="80%">
+</div>
+<div class="title">Figure 9. Logout if already signed in</div>
+</div>
+</li>
+<li>
+<p>Click on <strong>SIGN IN</strong> on top right of the page and login using username and password as <strong>(user.partner/openshift)</strong></p>
+</li>
+<li>
+<p>Navigate to Applications Listing by choosing the <strong>APPLICATIONS</strong> menu on the top of the page.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal_loggedin.png" alt="3scale dev portal loggedin" width="80%">
+</div>
+<div class="title">Figure 10. Developer Portal Landing Page</div>
+</div>
+</li>
+<li>
+<p>In the Applications page you are invited to <strong>Create Application</strong>. Click on the <strong>Create new application</strong> button seen against <code>globex-partner-gateway-product</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner_3scale_dev_portal_applications.png" alt="partner 3scale dev portal applications" width="70%">
+</div>
+<div class="title">Figure 11. Developer Portal: Create new application</div>
+</div>
+</li>
+<li>
+<p>Click on <strong>Subscribe to globex-partner-gateway-product</strong> link</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-partner-subscribe.png" alt="apim devportal partner subscribe">
+</div>
+<div class="title">Figure 12. Subscribe to globex-mobile-gateway-product</div>
+</div>
+</li>
+<li>
+<p>You are successfully subscribed to the service</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-partner-subscribe-success.png" alt="apim devportal partner subscribe success" width="70%">
+</div>
+<div class="title">Figure 13. Successfully subscribed to the service</div>
+</div>
+</li>
+<li>
+<p>Navigate back to the <strong>APPLICATIONS tab</strong> via the top menu.</p>
+</li>
+<li>
+<p>Under <strong>globex-partner-gateway-product</strong>, click on the <strong>Create new application</strong> button<br></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal_applications_partner.png" alt="3scale dev portal applications partner" width="70%">
+</div>
+<div class="title">Figure 14. Developer Portal: Create new application (again)</div>
+</div>
+</li>
+<li>
+<p>In the NEW APPLICATION page, give the plan a <strong>Name</strong> and a <strong>Description</strong> and click on <strong>Create Application</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-partner-create-new-app-2.png" alt="apim devportal partner create new app 2" width="70%">
+</div>
+<div class="title">Figure 15. Developer Portal: New application</div>
+</div>
+</li>
+<li>
+<p>An application is created successfully. Make a note of the <strong>Client ID</strong> and <strong>Client Secret</strong>. You will be using this in the Partner Web Portal setup.</p>
+</li>
+<li>
+<p>Enter the value asterisk (*) in the <strong>REDIRECT URL</strong> field and click on the <strong>Submit</strong> button. This is to setup the right Redirect URL for OAuth using Red Hat SSO</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-partner-app-success.png" alt="apim devportal partner app success" width="70%">
+</div>
+<div class="title">Figure 16. Update REDIRECT URL in the Application creates successfully for Partner User</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_partner_web_portal"><a class="anchor" href="#_setup_partner_web_portal"></a>Setup Partner Web Portal</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>In the previous section, you signed up for access as a Partner Developer and gained credentials to access the APIs Globex exposes.</p>
+</li>
+<li>
+<p>To update the Partner Web application you need these values</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Client ID &amp; Client Secret</strong> - Needs to be fetched from Red Hat SSO</p>
+</li>
+<li>
+<p><strong>Token URL</strong> - From Red Hat SSO - But available here in the instructions</p>
+</li>
+<li>
+<p><strong>Globex API Endpoint</strong> - From Red Hat 3scale - But available here in the instructions</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>These values are part of {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/deployments/globex-partner-web/environment[globex-partner-web deployment, window="console"] and are highlighted in the screenshot below</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner-web-deployment-env.png" alt="partner web deployment env">
+</div>
+<div class="title">Figure 17. globex-partner-web Deployment</div>
+</div>
+</li>
+<li>
+<p>The <strong>Client ID</strong> and <strong>Client Secret</strong> with values as placeholders are predeployed as a Kubernetes Secret called <strong>secret.yaml</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In the Dev workspace, under the folder <code>/projects/workshop-devspaces/workshop/module-apim/partners/partner-web</code>  open the file <strong>secret.yaml</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner_secret_yaml.png" alt="partner secret yaml" width="60%">
+</div>
+<div class="title">Figure 18. secret.yaml</div>
+</div>
+</li>
+<li>
+<p>Update the <strong>Client ID</strong> and <strong>Client Secret</strong> from the previous step on 3scale Developer Portal</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-partner-clientid.png" alt="apim devportal partner clientid" width="70%">
+</div>
+<div class="title">Figure 19. Client ID and Client Secret from 3scale Developer Portal</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Update <strong>Token URL</strong> with the following value</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://sso.{openshift_subdomain}/auth/realms/globex/protocol/openid-connect/token</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the <strong>Dev Spaces Terminal</strong> apply changes made to the <strong>secret.yaml</strong> by running the following command</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/partner-web/secret.yaml -n globex-apim-{user_name}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Output</div>
+<div class="content">
+<pre>secret/globex-partner-web configured</pre>
+</div>
+</div>
+</li>
+<li>
+<p>The final step is to patch the Partner Web portal with the <strong>Partner Gateway API endpoint</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>You would ideally get this from 3scale. But since you have learnt how to do this with Mobile API, we will skip navigating to 3scale to save some time.</p>
+</li>
+<li>
+<p>Execute this script in the Dev Spaces Terminal</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set env deployments/globex-partner-web --overwrite GLOBEX_PARTNER_GATEWAY=https://globex-partner-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Output</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">deployment.apps/globex-partner-web updated</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>[Click to learn] How do I verify what I just did?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_partner_web_application"><a class="anchor" href="#_test_partner_web_application"></a>Test Partner Web Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous section, you signed up for access as a Partner Developer and gained credentials to access the Globex PArtner Gateway API. You also setup the necessary configurations for the Partner Web Application.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch the <a href="https://globex-partner-web-globex-apim-{user_name}.{openshift_subdomain}" target="_blank" rel="noopener">Globex Partner Web</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/partner_web_portal.png" alt="partner web portal">
+</div>
+<div class="title">Figure 20. Partner Web Portal</div>
+</div>
+</li>
+<li>
+<p>Login using username/password as <strong>(partner/openshift)</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>It is notable that the partner users are not managed using Red Hat SSO.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>After logging in, the entire product list is shown in a paginated format.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Allow a few seconds for the catalogue to load</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Reload this page by hitting the Browser Refresh a few times which will help us to generate some analytics.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-partner-loggedin.png" alt="apim partner loggedin" width="80%">
+</div>
+<div class="title">Figure 21. User logged in and can view paginated products</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_analytics"><a class="anchor" href="#_analytics"></a>Analytics</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the {globex_developer_portal}/buyer/stats[Globex Developer Portal Statistics^, window="devportal"]</p>
+</li>
+<li>
+<p>From the dropdown indicated in this screenshot, choose the Partner Gateway API&#8217;s application plan (which is  <code>partner-basic</code> in this case).</p>
+</li>
+<li>
+<p>You will be presented with the statistics graph of the calls made to this gateway by the Partner Developer&#8217;s access.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-partner-analytics.png" alt="apim partner analytics">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_under_the_hood"><a class="anchor" href="#_under_the_hood"></a>Under the hood</h3>
+<div class="paragraph">
+<p>As part of this Section you setup and tested the Partner Web App.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user <strong>partner</strong> that you logged into the Partner App as, is not authenticated using Red Hat SSO. In fact it is not authenticated at all.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This is because the way partners handle user authentication is not something that Globex is concerned about at all.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>In this scenario we use Client Credentials authentication, because the backend NodeJS server authenticates itself with Client ID and Credentials obtained by the Partner Developer while signing up for an Application via 3scale Developer Portal</p>
+</li>
+<li>
+<p>The token generated by NodeJS is then exchanged with 3scale to ensure the Client ID indeed has access to that particular API</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img
+          src="../_/img/app-services-logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"  href="https://redhat.com" ></a>
+</footer><script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

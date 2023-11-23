@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
-    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/02-architecture.html">
-    <link rel="prev" href="index.html#_content_overview">
-    <link rel="next" href="03-demo.html">
+    <title>Untitled :: Solution Patterns for Cloud Native Architectures</title>
+    <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/globex-apim-intro.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -162,18 +160,18 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="02-architecture.html">2. Architecture</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#tech_stack">2.1. Technology stack</a>
+    <a class="nav-link" href="02-architecture.html#tech_stack">2.1. Technology stack</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#in_depth">2.2. An in-depth look at the solution&#8217;s architecture</a>
+    <a class="nav-link" href="02-architecture.html#in_depth">2.2. An in-depth look at the solution&#8217;s architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#tech_stack">2.3. More about the technology stack</a>
+    <a class="nav-link" href="02-architecture.html#tech_stack">2.3. More about the technology stack</a>
   </li>
 </ul>
   </li>
@@ -239,77 +237,53 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">Contract First approach - Advanced with OIDC</a></li>
-    <li><a href="02-architecture.html">2. Architecture</a></li>
-  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/jayachristina/solution-pattern-contract-first-advanced/edit/main/documentation/modules/ROOT/pages/02-architecture.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/solution-pattern-contract-first-advanced/edit/main/documentation/modules/ROOT/pages/globex-apim-intro.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Solution Pattern: Name Template</h1>
-<h1 id="_architecture" class="sect0"><a class="anchor" href="#_architecture"></a><a class="link" href="#_architecture">Architecture</a></h1>
-<div class="openblock partintro">
-<div class="content">
-Introduction for the architecture of this solution pattern.
-</div>
+<div class="paragraph">
+<p>In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way across internal and external teams to build microservices and APIs based systems.</p>
 </div>
 <div class="sect1">
-<h2 id="tech_stack"><a class="anchor" href="#tech_stack"></a><a class="link" href="#tech_stack">1. Technology Stack</a></h2>
+<h2 id="_business_context"><a class="anchor" href="#_business_context"></a>Business context</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_red_hat_supported_technologies"><a class="anchor" href="#_red_hat_supported_technologies"></a><a class="link" href="#_red_hat_supported_technologies">1.1. Red Hat supported technologies</a></h3>
+<div class="paragraph">
+<p>As mentioned in the introduction module of the workshop, Globex went through a modernization phase for their retail web application, moving from a legacy monolith to a containerized application. With their growing popularity, Globex would like to add new channels to their existing, web-based e-commerce application.</p>
+</div>
+<div class="paragraph">
+<p>They are working towards launching their own <strong>Globex Mobile App</strong> and  partnering with other large retail portals. This requires formalizing the application API definitions and exposing the APIs through a API Management solution for consumption by the Globex Mobile App and by Partner Portals.</p>
+</div>
+<div class="paragraph">
+<p><strong>(a) Mobile App</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank" rel="noopener">Red Hat OpenShift</a></p>
+<p>Globex would like to launch a mobile application as well in addition to the retail web-site. Globex does not have the necessary expertise in mobile development, so development will have to be outsourced.</p>
 </li>
 <li>
-<p><a href="https://www.redhat.com/en/products/application-foundations" target="_blank" rel="noopener">Red Hat Application Foundations</a></p>
+<p>This means that, the mobile application will also need secure access to the Globex APIs</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>(b) Partner Portal</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://access.redhat.com/products/quarkus" target="_blank" rel="noopener">Quarkus</a></p>
+<p>Retail partner aggregators would like to showcase Globex&#8217;s product catalogue on their website</p>
 </li>
 <li>
-<p><a href="https://www.redhat.com/en/technologies/jboss-middleware/3scale">3scale</a></p>
-</li>
-<li>
-<p><a href="https://access.redhat.com/documentation/en-us/red_hat_build_of_apicurio_registry" target="_blank" rel="noopener">Red Hat build of Apicurio Registry</a></p>
+<p>To allow for this access, Globex would like to expose an API to allow access to their APIs</p>
 </li>
 </ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_complementary_open_source_technologies"><a class="anchor" href="#_complementary_open_source_technologies"></a><a class="link" href="#_complementary_open_source_technologies">1.2. Complementary open source technologies</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://microcks.io/">Microcks</a></p>
-</li>
-<li>
-<p><a href="https://www.postgresql.org/">PostgreSQL database</a></p>
-</li>
-<li>
-<p><a href="https://helm.sh/">Helm</a></p>
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="in_depth"><a class="anchor" href="#in_depth"></a><a class="link" href="#in_depth">2. An in-depth look at the solution&#8217;s architecture</a></h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_technical_considerations"><a class="anchor" href="#_technical_considerations"></a><a class="link" href="#_technical_considerations">3. Technical considerations</a></h2>
+<h2 id="_technical_considerations"><a class="anchor" href="#_technical_considerations"></a>Technical considerations</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The new requirements to expand Globex&#8217;s business by adding additional channels bring its own set of challenges</p>
@@ -348,7 +322,7 @@ Introduction for the architecture of this solution pattern.
 <p>To make this a reality a number of components are brought together to realise the final solution</p>
 </div>
 <div class="sect2">
-<h3 id="_red_hat_sso"><a class="anchor" href="#_red_hat_sso"></a><a class="link" href="#_red_hat_sso">3.1. Red Hat SSO</a></h3>
+<h3 id="_red_hat_sso"><a class="anchor" href="#_red_hat_sso"></a>Red Hat SSO</h3>
 <div class="paragraph">
 <p>Globex uses Red Hat SSO to provide single sign-on (SSO) capabilities to Users, Web apps and APIs. In this case, OpenID Connect is used to authenticate a user (Globex Web and Mobile users) and also allow secured access to Globex&#8217;s APIs</p>
 </div>
@@ -365,13 +339,13 @@ Introduction for the architecture of this solution pattern.
 </details>
 </div>
 <div class="sect2">
-<h3 id="_api_designer"><a class="anchor" href="#_api_designer"></a><a class="link" href="#_api_designer">3.2. API Designer</a></h3>
+<h3 id="_api_designer"><a class="anchor" href="#_api_designer"></a>API Designer</h3>
 <div class="paragraph">
 <p>Red Hat API Designer based on Apicurio provides web based API Designer tool. You will use this a draft OpenAPI file from your local file system and visually edit it (and then save it back to your disk)!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_service_registry"><a class="anchor" href="#_service_registry"></a><a class="link" href="#_service_registry">3.3. Service Registry</a></h3>
+<h3 id="_service_registry"><a class="anchor" href="#_service_registry"></a>Service Registry</h3>
 <div class="paragraph">
 <p>Publish the OpenAPIs and makes the OpenAPIs accessible. The REST endpoint of the artifact (APIs) is used to create ActiveDocs within the API Management platform.</p>
 </div>
@@ -391,7 +365,7 @@ Introduction for the architecture of this solution pattern.
 </details>
 </div>
 <div class="sect2">
-<h3 id="_3scale_api_management"><a class="anchor" href="#_3scale_api_management"></a><a class="link" href="#_3scale_api_management">3.4. 3scale API Management</a></h3>
+<h3 id="_3scale_api_management"><a class="anchor" href="#_3scale_api_management"></a>3scale API Management</h3>
 <div class="paragraph">
 <p>Red Hat 3scale API Management platform is used to publish, manage and secure the backend APIs. API Management helps you to define, deploy, consume, or publish your APIs for use by other developers, channels and partners. In this workshop, you will work with OpenID Connect to secure the APIs.</p>
 </div>
@@ -405,7 +379,7 @@ Introduction for the architecture of this solution pattern.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_backend_services"><a class="anchor" href="#_backend_services"></a><a class="link" href="#_backend_services">3.5. Backend Services</a></h3>
+<h3 id="_backend_services"><a class="anchor" href="#_backend_services"></a>Backend Services</h3>
 <div class="paragraph">
 <p>Not all of Globex&#8217;s services are made available in the first iteration for access by Mobile and Partners. The Backend For Frontend (BFF) services are generated based on the OpenAPI Specs</p>
 </div>
@@ -426,13 +400,13 @@ Introduction for the architecture of this solution pattern.
 </details>
 </div>
 <div class="sect2">
-<h3 id="_mobile_app"><a class="anchor" href="#_mobile_app"></a><a class="link" href="#_mobile_app">3.6. Mobile App</a></h3>
+<h3 id="_mobile_app"><a class="anchor" href="#_mobile_app"></a>Mobile App</h3>
 <div class="paragraph">
 <p>For the first iteration, the Mobile App is built using Angular + NodeJS. This app uses <a href="https://github.com/damienbod/angular-auth-oidc-client" target="code-samples">angular-auth-oidc-client</a> to enable user SSO.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_a_graphical_representation_of_the_architecture"><a class="anchor" href="#_a_graphical_representation_of_the_architecture"></a><a class="link" href="#_a_graphical_representation_of_the_architecture">3.7. A graphical representation of the architecture:</a></h3>
+<h3 id="_a_graphical_representation_of_the_architecture"><a class="anchor" href="#_a_graphical_representation_of_the_architecture"></a>A graphical representation of the architecture:</h3>
 <div class="imageblock">
 <div class="content">
 <img src="_images/apim_deployment.png" alt="apim deployment">
@@ -442,17 +416,13 @@ Introduction for the architecture of this solution pattern.
 </div>
 </div>
 <div class="sect1">
-<h2 id="more_tech"><a class="anchor" href="#more_tech"></a><a class="link" href="#more_tech">4. About the Technology Stack</a></h2>
+<h2 id="_implementation"><a class="anchor" href="#_implementation"></a>Implementation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to include more details about the tech stack you used, this is the place.</p>
+<p>In the next chapter, you will be guided through the implementation and deployment of the Contract First Approach. Of course this entails way more than can be achieved during a workshop, so instead most components are already in place, and you will focus on a number of key activities to deploy and run the solution.</p>
 </div>
 </div>
 </div>
-<nav class="pagination">
-  <span class="prev"><a href="index.html#_content_overview" class="query-params-link">1.4 Content Overview</a></span>
-  <span class="next"><a href="03-demo.html" class="query-params-link">3. Solution in Action</a></span>
-</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

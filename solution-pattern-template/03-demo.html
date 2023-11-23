@@ -3,63 +3,141 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Solution Pattern: Name Template :: Solution Patterns for Cloud Native Architectures</title>
+    <title>Solution Pattern: Multi-Channel Contract First Approach :: Solution Patterns for Cloud Native Architectures</title>
     <link rel="canonical" href="https://redhat-solution-patterns.github.io/solution-patterns/solution-pattern-template/03-demo.html">
     <link rel="prev" href="02-architecture.html">
-    <link rel="next" href="04-workshop.html">
+    <link rel="next" href="developer-resources.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="article">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TW8CJFT3N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9TW8CJFT3N');
+</script>
+<!-- Google tag (gtag.js) -->
+
 <header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () { 
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('USERID');
+      const subdomain = urlParams.get('SUBDOMAIN'); 
+      if (userId) {
+        showUserId( userId, subdomain);
+      }
+      else {
+        showUserIdForm(subdomain);
+      }
+    } );
+
+
+    function showUserId( userId, subdomain) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('userIdDisplay').textContent = "User ID : " + userId;
+      document.getElementById('subdomainDisplay').textContent = "Subdomain : " + subdomain; 
+    }
+
+    function showUserIdForm( subdomain ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+      document.getElementById('subdomain').value = subdomain; 
+
+    }
+
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubdomainInput = document.getElementById('subdomain');
+      window.location.search = ('&USERID=' + elUserIdInput.value  + '&SUBDOMAIN=' + elSubdomainInput.value);
+    }
+
+    function recycle() {
+      document.getElementById('userId').value='';
+      document.getElementById('subdomain').value='';
+      window.location.search = ('');
+    }
+
+
+  </script>
   <nav class="navbar">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://redhat.com" target="_blank"><img
-          src="../_/img/logo.png" height="40px" alt="Cloud Native Architecture Solution Patterns"></a>
-      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-solution-patterns.github.io/solution-patterns">Solution Patterns for Cloud Native Architectures</a>
+   <div class="navbar-brand">
+      <a class="navbar-item" style="font-size: 20px; color: white" href="https://redhat-solution-patterns.github.io/solution-patterns">
+        <img src="../_/img/logo.png" height="35px" alt="Solution Patterns">&nbsp; Solution Patterns for Cloud Native Architectures</a>
       <button class="navbar-burger" data-target="topbar-nav">
-        <span></span>
-        <span></span>
-        <span></span>
       </button>
+      
     </div>
-    <div id="topbar-nav" class="navbar-menu">
-      <div class="navbar-end">
-
-       
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Solution Patterns</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Adopt Change Data Capture for <br/>stack modernization</a>
-            <a class="navbar-item" href="#">Edge-to-Cloud Pipelines</a>     <a class="navbar-item" href="#">Event driven architecture</a>
-          </div>
-        </div>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Other</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://redhat-gitops-patterns.io/">GitOps Solution Patterns</a>
-            <a class="navbar-item" href="https://hybrid-cloud-patterns.io/">Hybrid Cloud Solution Patterns</a>
-          </div>
-        </div>
-
-        <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/middleware">Red Hat Application Services</a>
-
-        <a class="navbar-item" target="_blank" href="https://developers.redhat.com/middleware">Learn more</a>
+    <div class="navbar-item" ><span class="navbar-text" style="color: white; margin-left: 1rem; margin-right: 1rem;">|</span></div>
+    
+    <div class="navbar-item has-dropdown is-hoverable" >
+      <a class="navbar-link" href="#" style="color: white">Red Hat Patterns</a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" href="https://www.redhat.com/architect/portfolio/" target="_blank">Portfolio Architecture&nbsp; </a>
+        <a class="navbar-item" href="https://redhat-solution-patterns.github.io/solution-patterns/patterns.html" target="_blank">Solution Patterns </a>
+        <a class="navbar-item" href="https://validatedpatterns.io/" target="_blank">Validated Patterns&nbsp;</a>
 
       </div>
     </div>
+    <div class="navbar-item has-dropdown is-hoverable" >
+      <a class="navbar-link" href="#" style="color: white">Resources</a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" target="_blank" href="https://www.redhat.com/en/products/application-foundations">Red Hat Application Services</a>
+        <a class="navbar-item" target="_blank" href="https://developers.redhat.com/app-dev-platform">App Dev Platform</a>
+      </div>
+    </div>
+
+    <div class="navbar-item" ><span class="navbar-text" style="color: white; margin-left: 1rem; margin-right: 1rem;">|</span></div>
+
+
+    
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        
+
+
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 2rem;">
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+            Your Workshop Environment
+
+          <form action="javascript:void(0);" onsu>
+            <input size="20" id="userId" type="text" placeholder="USER ID">
+            <input size="20" id="subdomain" type="text" placeholder="Subdomain">
+            <button type="hidden" onclick="goWithUserId();">Set</button>
+          </form>
+        </div>
+        
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 2rem;">
+          <span class="navbar-text " style="margin-left: 1rem; margin-right: 1rem; float:left">
+            &nbsp;Your Workshop Environment <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i alt="Clear details" title="Clear details" onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i>
+
+          <br><span  id="userIdDisplay"></span> <span  style="color: white; margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span id="subdomainDisplay"></span>
+        </div>
+
+        
+        </span>
+
+    </div>
   </nav>
-</header>
-<div class="body">
+</header><div class="body">
 <div class="nav-container" data-component="solution-pattern-template" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html" class=" query-params-link">Template Tutorial</a></h3>
+    <h3 class="title"><a href="index.html" class=" query-params-link">Contract First approach - Advanced with OIDC</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -71,10 +149,10 @@
     <a class="nav-link" href="index.html#use-cases">1.1 Use cases</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-pattern.html#_the_story_behind_this_solution_pattern">1.2 The story behind this solution pattern</a>
+    <a class="nav-link" href="#01-pattern.adoc#_the_story_behind_this_solution_pattern">1.2 The story behind this solution pattern</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-pattern.html#_the_solution">1.3 The solution</a>
+    <a class="nav-link" href="#01-pattern.adoc#_the_solution">1.3 The solution</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="index.html#_content_overview">1.4 Content Overview</a>
@@ -101,7 +179,7 @@
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="03-demo.html">3. See the Solution in Action</a>
+    <a class="nav-link" href="03-demo.html">3. Solution in Action</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#_demonstration">3.1. Demonstration</a>
@@ -124,28 +202,13 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="04-workshop.html">4. Workshop</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="04-workshop.html#_installing_the_workshop_environment">4.1. Installing the workshop environment</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <span class="nav-text">xref:04-workshop.adoc#_before_getting_started[4.2. Pre-requisites</span>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="04-workshop.html#install_wksp_details">4.3. Installing the environment</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-workshop.html#deliver_wksp">4.4. Delivering the workshop</a>
-  </li>
-</ul>
+    <a class="nav-link" href="developer-resources.html">4. Developer Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="https://redhat-solution-patterns.github.io/">5. Other Red Hat Solution Patterns</a>
+    <a class="nav-link" href="#05-appendix.adoc">5. Appendix</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://redhat-solution-patterns.github.io/">Other Red Hat Solution Patterns</a>
   </li>
 </ul>
   </li>
@@ -154,12 +217,12 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Template Tutorial</span>
+    <span class="title">Contract First approach - Advanced with OIDC</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <span class="title">Template Tutorial</span>
+      <span class="title">Contract First approach - Advanced with OIDC</span>
       <ul class="versions">
         <li class="version is-current">
           <a href="index.html">master</a>
@@ -177,35 +240,21 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Template Tutorial</a></li>
-    <li><a href="03-demo.html">3. See the Solution in Action</a></li>
+    <li><a href="index.html">Contract First approach - Advanced with OIDC</a></li>
+    <li><a href="03-demo.html">3. Solution in Action</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-solution-patterns/solution-pattern-website-template/edit/main/documentation/modules/ROOT/pages/03-demo.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/solution-pattern-contract-first-advanced/edit/main/documentation/modules/ROOT/pages/03-demo.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Solution Pattern: Name Template</h1>
+<h1 class="page">Solution Pattern: Multi-Channel Contract First Approach</h1>
 <h1 id="_see_the_solution_in_action" class="sect0"><a class="anchor" href="#_see_the_solution_in_action"></a><a class="link" href="#_see_the_solution_in_action">See the Solution in Action</a></h1>
 <div class="sect1">
 <h2 id="_demonstration"><a class="anchor" href="#_demonstration"></a><a class="link" href="#_demonstration">1. Demonstration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Include here content related to potential existing demos: blogs, articles, recorded videos, walkthrough guides, tutorials.</p>
-</div>
-<div class="sect2">
-<h3 id="demo-video"><a class="anchor" href="#demo-video"></a><a class="link" href="#demo-video">1.1. Watch a demonstration</a></h3>
-<div class="paragraph">
-<p>In this video you can see xpto:</p>
-</div>
-<div class="videoblock">
-<div class="content">
-<iframe width="800" height="480" src="https://www.youtube.com/embed/3yULVMdqJ98?rel=0" frameborder="0" allowfullscreen></iframe>
-</div>
-</div>
-<div class="paragraph">
-<p>Next, you can learn how to walkthrough this demo.</p>
-</div>
 </div>
 </div>
 </div>
@@ -242,12 +291,1582 @@
 <div class="paragraph">
 <p>How to run through the demo</p>
 </div>
+<div class="paragraph">
+<p>In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way across internal and external teams to build microservices and APIs based systems.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objectives"><a class="anchor" href="#_objectives"></a><a class="link" href="#_objectives">3. Objectives</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is an outline of the activities you will achieve as part of this module.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-overview-flowchart.png" alt="apim overview flowchart">
+</div>
+<div class="title">Figure 1. Activities overview</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_red_hat_sso_an_introduction"><a class="anchor" href="#_red_hat_sso_an_introduction"></a><a class="link" href="#_red_hat_sso_an_introduction">4. Red Hat SSO - An Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat SSO is used in this module to both offer single-sign on to Mobile users, and also for securing the APIs.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>We will be using OpenID Connect which is an open authentication protocol that works on top of the OAuth 2.0 framework. OIDC offers a discovery mechanism called <strong>OpenID Connect Discovery</strong>, where an OpenID server (here Red Hat SSO based on Keycloak) publishes its metadata at a well-known URL. This URL is typically a collection of various endpoints the server offers, some of which are used in this workshop too.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch Red Hat SSO by clicking <a href="https://sso.%SUBDOMAIN%/auth/admin/globex/console" target="sso">SSO Console</a> and login using username and password (globex/openshift).</p>
+</li>
+<li>
+<p>Click on the <strong>OpenID Endpoint Configuration</strong> link to view the <strong>OpenID Provider Configuration</strong> of Red Hat SSO.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-sso-login.png" alt="apim sso login">
+</div>
+<div class="title">Figure 2. Red Hat SSO - Logged In</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In case you see an error stating <strong>You don&#8217;t have access to the requested resource</strong>, you will need to logout, close the browser tab, and login again</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on <strong>Sign Out</strong> and close the browser</p>
+</li>
+<li>
+<p>Launch Red Hat SSO by clicking <a href="https://sso.%SUBDOMAIN%/auth/admin/globex/console" target="sso">SSO Console</a> and login using username and password (globex/openshift).</p>
+</li>
+<li>
+<p>Login as <strong>(globex/openshift)</strong>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Here is how the <strong>OpenID Provider Configuration</strong> looks like</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/well-know-openid-configuration.png" alt="well know openid configuration">
+</div>
+<div class="title">Figure 3. Red Hat SSO - OpenID Provider Configuration</div>
+</div>
+</li>
+<li>
+<p>We are interested specifically in the following endpoints</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OpenID Provider Configuration (well-known config)</strong>:<br>
+This URL provides a mechanism to discover the End-User&#8217;s OpenID Provider and obtain information needed to interact with it, including OpenID/OAuth endpoint locations. The following endpoints is fetched from this URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://sso.%SUBDOMAIN%/auth/realms/globex/.well-known/openid-configuration" class="bare">https://sso.%SUBDOMAIN%/auth/realms/globex/.well-known/openid-configuration</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>issuer</strong>:<br>
+This value is needed when we need to authorize a user through single sign-on</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://sso.%SUBDOMAIN%/auth/realms/globex" class="bare">https://sso.%SUBDOMAIN%/auth/realms/globex</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>token_endpoint</strong> :<br>
+clients can obtain access tokens from the server using this token endpoint and use these same tokens to access protected resources (APIs in our case)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://sso.%SUBDOMAIN%/auth/realms/globex/protocol/openid-connect/token" class="bare">https://sso.%SUBDOMAIN%/auth/realms/globex/protocol/openid-connect/token</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_design_and_govern_mobile_openapi_specification"><a class="anchor" href="#_design_and_govern_mobile_openapi_specification"></a><a class="link" href="#_design_and_govern_mobile_openapi_specification">5. Design and Govern Mobile OpenAPI Specification</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this step you will import the draft OpenAPI specs for <strong>Mobile App</strong> and edit them to include <strong>Security Schemes</strong>. Once the API design phase is complete you will then manage that within the Red Hat Service Registry. The API Designer sessions are stateless and you must save your API definition as a JSON file at the end of each session.</p>
+</div>
+<div class="sect2">
+<h3 id="_section_goals"><a class="anchor" href="#_section_goals"></a><a class="link" href="#_section_goals">5.1. Section Goals</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Import a draft OpenAPI specification for Mobile App into an API Designer</p>
+</li>
+<li>
+<p>Edit the draft OpenAPI specification to add <strong>OpenID Security Schemes</strong> and include Red Hat SSO&#8217;s OpenID Provider Configuration</p>
+</li>
+<li>
+<p>Govern the Mobile OpenAPI with Red Hat Service Registry</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_design_mobile_openapi"><a class="anchor" href="#_design_mobile_openapi"></a><a class="link" href="#_design_mobile_openapi">5.2. Design Mobile OpenAPI</a></h3>
+<div class="paragraph">
+<p>To import the OpenAPI draft into API designer, you can import as text OR upload as file. To keep things simple in this workshop, you will import the content by simply pasting the draft spec as YAML based text into the API designer.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In a real-world scenario you would do the inverse: start with an empty API specification, and define the different elements of the spec document. You would then export the spec in JSON or YAML format (by copying the contents from the source editor) to your local file system and push it to version control.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch API Designer by clicking on this link <a href="https://apicurio-designer.%SUBDOMAIN%" target="api_designer">API Designer</a></p>
+</li>
+<li>
+<p>Click on the <strong>New API</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/api-designer.png" alt="api designer">
+</div>
+<div class="title">Figure 4. Red Hat API Designer - New API</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Source Tab</strong> on the <strong>New API</strong> page, and delete the entire content in the window.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Note: Keep this tab open. You will be pasting the draft OpenAPI into this window.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/api-new-api.png" alt="api new api">
+</div>
+<div class="title">Figure 5. API Designer - Open Source Tab</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/api-desginer-clear.png" alt="api desginer clear">
+</div>
+<div class="title">Figure 6. API Designer: Clear all content in Source Tab</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Fetch the draft API from <a href="https://raw.githubusercontent.com/rh-soln-pattern-contract-first-advanced/workshop-yaml/main/module-apim/mobile/activedoc/mobile-activedoc-draft.yaml" target="_blank" rel="noopener">the Mobile OpenAPI draft</a>.</p>
+</li>
+<li>
+<p>Copy the entire contents from this file <code>(Ctrl+A and Ctrl+C)</code></p>
+</li>
+<li>
+<p>Now paste the copied content (draft OpenAPI) from the above step into the API designer&#8217;s <strong>Source Tab</strong> replacing all of the existing content. Click on <strong>Save</strong> button as highlighted in the screenshot below.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-draft-imported.png" alt="mobile draft imported">
+</div>
+<div class="title">Figure 7. API Designer: Paste Mobile Draft OpenAPI</div>
+</div>
+</li>
+<li>
+<p>Navigate back to the <strong>Design Tab</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/api-design-tab.png" alt="api design tab">
+</div>
+<div class="title">Figure 8. API Designer: Design Tab</div>
+</div>
+</li>
+<li>
+<p>You will now need to update the security scheme. Under the <strong>SECURITY SCHEMES</strong> section, click on <strong>Add a security scheme</strong> link</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/api-designer-sec-scheme.png" alt="api designer sec scheme">
+</div>
+<div class="title">Figure 9. API Designer: Add a security scheme</div>
+</div>
+</li>
+<li>
+<p>You are presented with the <strong>Define the Security Scheme</strong> page. Provide the following values in the form, and click on <strong>Save</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Name (textbox)</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">openid-connect</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Description (textarea)</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">OpenID Connect security scheme</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Security Type (dropdown)</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">OpenID Connect</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>OpenID Connect URL (textbox)</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://sso.%SUBDOMAIN%/auth/realms/globex/.well-known/openid-configuration</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/define-security-scheme.png" alt="define security scheme" width="90%">
+</div>
+<div class="title">Figure 10. API Designer: Define the Security Scheme wizard</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You are navigated back to the homepage. Verify that you can see the <strong>SECURITY SCHEMES</strong> has been updated with your configuration</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/security-scheme-complete.png" alt="security scheme complete">
+</div>
+<div class="title">Figure 11. API Designer: Verify openid-connect Security Scheme added</div>
+</div>
+</li>
+<li>
+<p>The OpenAPI specification is now ready to be downloaded. Click on the <em>down arrow</em> button adjacent to <strong>Save As..</strong> and then choose <strong>Save as YAML</strong> button found on top-right of the page. The file gets saved automatically in the <strong>Downloads folder</strong> of your computer.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/api-download-as-yaml.png" alt="api download as yaml">
+</div>
+<div class="title">Figure 12. API Designer: Save API as YAML in your computer</div>
+</div>
+</li>
+<li>
+<p>You can now close this browser tab.</p>
+</li>
+<li>
+<p>The Mobile OpenAPI spec is ready to be governed with a Service Registry.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manage_the_mobile_openapi_with_service_registry"><a class="anchor" href="#_manage_the_mobile_openapi_with_service_registry"></a><a class="link" href="#_manage_the_mobile_openapi_with_service_registry">5.3. Manage the Mobile OpenAPI with Service Registry</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch <strong>Service Registry</strong> by accessing <a href="https://service-registry-apim.%SUBDOMAIN%" target="service_registry_url">Service Registry</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/service-registry-landing.png" alt="service registry landing">
+</div>
+<div class="title">Figure 13. Service Registry: Landing Page</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Upload artifact</strong> button as shown in the above screenshot. You will be presented with a <strong>Upload Artifact</strong> wizard</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sr-upload-artifact.png" alt="sr upload artifact">
+</div>
+<div class="title">Figure 14. Service Registry: <strong>Upload Artifact</strong> wizard</div>
+</div>
+</li>
+<li>
+<p>In the wizard, enter the following details, and click on the <strong>Upload</strong> button.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the exact same values as instructed below to avoid errors in the other sections of this labs.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 71.4286%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Group</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>globex</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ID of the artifact</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mobileapi</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Artifact textarea</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Click on <strong>Browse..</strong> button to upload the Mobile OpenAPI downloaded in the previous step, or <code>Drag &amp; drop</code> the file into the textarea.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sr-spec-setting.png" alt="sr spec setting">
+</div>
+<div class="title">Figure 15. Service Registry: Provide information needed by <strong>Upload Artifact</strong> wizard and <strong>Upload</strong></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Note that the <strong>Globex Mobile API Gateway</strong> artifact has been uploaded and stored within <strong>Service Registry</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sr-uploaded.png" alt="sr uploaded">
+</div>
+<div class="title">Figure 16. Service Registry: <strong>Globex Mobile API Gateway</strong> artifact has been uploaded</div>
+</div>
+</li>
+<li>
+<p>You can share this OpenAPI schema with others via <a href="https://service-registry-apim.%SUBDOMAIN%/apis/registry/v2/groups/globex/artifacts/mobileapi" target="_blank" rel="noopener">this OpenAPI Schema&#8217;s endpoint</a></p>
+</li>
+<li>
+<p>You can now close the Service Registry&#8217;s browser tab.</p>
+</li>
+<li>
+<p>This schema can be used for generating Quarkus code for both Clients and Server-side using maven plugins. (Note that the <a href="https://github.com/rh-cloud-architecture-workshop/globex-mobile" target="code-samples">Globex Mobile App</a> is NodeJS + Angular in this module)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_outcome"><a class="anchor" href="#_section_outcome"></a><a class="link" href="#_section_outcome">5.4. Section Outcome</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added Security Scheme to Mobile OpenAPI with API Desginers</p>
+</li>
+<li>
+<p>Imported the Mobile OpenAPI into Service Registry to govern the API spec.</p>
+</li>
+<li>
+<p>A shareable link is available to the Mobile OpenAPI specification to be used by other teams and systems.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleanup"><a class="anchor" href="#_cleanup"></a><a class="link" href="#_cleanup">5.5. Cleanup</a></h3>
+<div class="paragraph">
+<p>Please close the API Designer and Service Registry browser tabs (^‿^) to avoid too many browser tabs</p>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_3scale_api_management_to_secure_and_manage_mobile_gateway_api"><a class="anchor" href="#_configure_3scale_api_management_to_secure_and_manage_mobile_gateway_api"></a><a class="link" href="#_configure_3scale_api_management_to_secure_and_manage_mobile_gateway_api">6. Configure 3scale API Management to secure and manage Mobile Gateway API</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Mobile API has now been designed in the API Designer, and is governed by Red Hat Build of Apicurios Registry.</p>
+</div>
+<div class="paragraph">
+<p>Let us fast forward a bit in time, and the backend developers team has built the Mobile Gateway server-side <a href="https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway" target="code-samples">code</a> built using Quarkus. This service has been pre-deployed under the <code>globex-apim-user1</code> namespace on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>In this section you will manage and secure the Mobile Gateway API endpoints so that the Mobile App can access them securely. To create these API endpoints, and secure and manage them, we will need to configure them on 3scale API management.</p>
+</div>
+<div class="sect2">
+<h3 id="_section_goals_2"><a class="anchor" href="#_section_goals_2"></a><a class="link" href="#_section_goals_2">6.1. Section Goals</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>setup Red Hat SSO to provide single sign-on (SSO) capabilities for users signing into Mobile App</p>
+</li>
+<li>
+<p>setup Red Hat SSO to secure Mobile Gateway API endpoints using OpenID Connect</p>
+</li>
+<li>
+<p>manage Mobile Gateway APIs with Red Hat 3scale API Management</p>
+</li>
+<li>
+<p>access Red Hat 3scale API Management&#8217;s Developer Portal as a Mobile Developer to sign up for access of API</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_red_hat_sso"><a class="anchor" href="#_red_hat_sso"></a><a class="link" href="#_red_hat_sso">6.2. Red Hat SSO</a></h3>
+<div class="paragraph">
+<p>3scale integrates with Red Hat SSO for authenticating the API requests using the OpenID Connect specification. On signing-up, External/Mobile developers  will be provided with client credentialsto access to the APIs securely. This client credentials is synced between 3scale and the Red Hat Single Sign-On server using a component know an <strong>Zync</strong></p>
+</div>
+<div class="paragraph">
+<p>In order to setup OpenID Connect, you will now create a special <strong>client id</strong> meant for <strong>Client Credentials Management</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click to launch <a href="https://sso.%SUBDOMAIN%/auth/admin/globex/console" target="sso">Red Hat SSO</a> and login using username and password <code>(globex/openshift)</code>.</p>
+</li>
+<li>
+<p>Click on <strong>Clients</strong> from the left-hand navigation. And, then click on the <strong>Create</strong> button on the right side as shown below</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-add.png" alt="client add">
+</div>
+<div class="title">Figure 17. Red Hat SSO: Clients listing</div>
+</div>
+</li>
+<li>
+<p>In the <strong>Add Client</strong> wizard, enter the following details, and click on the <strong>Save</strong> button.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>client-manager</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client Protocol (dropdown)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>openid-connect</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-manager.png" alt="client manager">
+</div>
+<div class="title">Figure 18. Red Hat SSO: Add Client wizard</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You will be shown the <strong>Settings</strong> tab of <code>client-manager</code> client.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/new-client-save.png" alt="new client save">
+</div>
+<div class="title">Figure 19. Red Hat SSO: View <strong>client-manager</strong> Settings</div>
+</div>
+</li>
+<li>
+<p>Configure this <code>client-manager</code> as follows (refer to screenshot below) so that 3scale can synchronize with Red Hat SSO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Change <strong>Access Type</strong> to <code>Confidential</code></p>
+</li>
+<li>
+<p>Once the Access Types is Confidential you will see a new toggle button <strong>Service Accounts Enabled</strong></p>
+</li>
+<li>
+<p>Keep <strong>Service Accounts Enabled</strong> as ON, and turn all other Grants and Flow OFF to match the following screenshot.</p>
+<div class="paragraph">
+<p>This configuration allows only Services based access using Service Accounts, and will be used by 3scale API Management system in the next steps, when mobile users sign up for access. Service accounts provide a flexible way to control API access without sharing a regular user&#8217;s credentials.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-manager-setting.png" alt="client manager setting">
+</div>
+<div class="title">Figure 20. Red Hat SSO: Configure client-manager</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click on <strong>Save</strong> button at the bottom of the page. You will be notified that the changes are saved successfully.<br></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-manager-save.png" alt="client manager save">
+</div>
+<div class="title">Figure 21. Red Hat SSO: Save client-manager settings</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Now you will need to setup <strong>Client Roles</strong> for this client id, so that it can manage other clients (create, amend and delete) on behalf of 3scale API Management</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on the <strong>Service Account Roles</strong> tab from the top tab navigation.</p>
+</li>
+<li>
+<p>From the <strong>Client Roles</strong> dropdown, choose <code>realm-management</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sso-service-acc-tab.png" alt="sso service acc tab">
+</div>
+<div class="title">Figure 22. Red Hat SSO: setup Service Account Roles for <strong>client-manager</strong> in Service Account Roles tab</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>From the <strong>Available Roles</strong> multichoice field, choose <code>manage-clients</code>, and click on <strong>Add selected &gt;&gt;</strong> button</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The mappings will get auto-saved.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-realm-management.png" alt="client realm management">
+</div>
+<div class="title">Figure 23. Red Hat SSO: Add manage-clients roles</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>You can view the credentials of this client-id from the <strong>Credentials</strong> tab. You will need this when setting up the 3scale products<br></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-manager-credentials.png" alt="client manager credentials">
+</div>
+<div class="title">Figure 24. Red Hat SSO: Client Credentials of client-manager</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_mobile_gateway_backend_product_and_activedoc_on_3scale"><a class="anchor" href="#_create_mobile_gateway_backend_product_and_activedoc_on_3scale"></a><a class="link" href="#_create_mobile_gateway_backend_product_and_activedoc_on_3scale">6.3. Create Mobile Gateway Backend, Product and ActiveDoc on 3scale</a></h3>
+<div class="paragraph">
+<p>To integrate and manage the Mobile Gateway API in 3scale, you need to create Products and Backend</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>[Click to learn] What are Backend, Product, ActiveDocs and CRDs?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In this workshop you will be using the <strong>3scale Operator</strong> that creates and maintains 3scale on OpenShift with custom resource definitions (CRDs).</p>
+</div>
+<div class="sect3">
+<h4 id="_create_3scale_backend_for_mobile_gateway_service"><a class="anchor" href="#_create_3scale_backend_for_mobile_gateway_service"></a><a class="link" href="#_create_3scale_backend_for_mobile_gateway_service">6.3.1. Create 3scale Backend for Mobile Gateway service</a></h4>
+<div class="paragraph">
+<p>To create the Backend for Mobile Gateway, you will need the Service URL of Mobile Gateway deployment running on OpenShift.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>[Click to learn] What is a Service</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>From the OpenShift Console, click on the <code>+</code> button show on top-right corner of the portal as show below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Make sure that the project is selected is <code>globex-apim-user1</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/import-yaml.png" alt="import yaml">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Copy the content below and paste in the "Import YAML" form you opened in the previous step.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This YAML is prefilled with the appropriate Service URL of the Mobile Gateway service</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>How to fetch Service URL from OpenShift console?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: globex-mobile-gateway-backend
+spec:
+  name: "Globex Mobile Gateway Backend"
+  systemName: "globex-mobile-gateway-backend"
+  privateBaseURL: "http://globex-mobile-gateway.globex-apim-user1.svc.cluster.local:8080"
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: "hit"
+  mappingRules:
+    - httpMethod: GET
+      pattern: "/"
+      increment: 1
+      metricMethodRef: hits</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click the  <strong>Create</strong> button</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/import-yaml-create.png" alt="import yaml create" width="60%">
+</div>
+</div>
+</li>
+<li>
+<p>Note that a Backed has been created. Under the <strong>Conditions</strong> Section note that <strong>Type</strong>, <strong>Synced</strong> has the <strong>Status</strong> as <code>true</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/import-backend-created.png" alt="import backend created" width="75%">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_3scale_product_for_mobilegateway_api"><a class="anchor" href="#_create_3scale_product_for_mobilegateway_api"></a><a class="link" href="#_create_3scale_product_for_mobilegateway_api">6.3.2. Create 3scale Product for MobileGateway API</a></h4>
+<div class="paragraph">
+<p>You will now create a 3scale Product, and also attach the Backend we created in the previous step to the Product.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>From the OpenShift Console, click on the <code>+</code> button show on top-right corner of the portal as show below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Make sure that the project is selected is <code>globex-apim-user1</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Copy the content below and paste in the "Import YAML" form you opened in the previous step.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">apiVersion: capabilities.3scale.net/v1beta1
+kind: Product
+metadata:
+  name: globex-mobile-gateway-product
+spec:
+  name: "globex-mobile-gateway-product"
+  systemName: "globex-mobile-gateway-product"
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  deployment:
+    apicastHosted:
+      authentication:
+        oidc:
+          issuerType: "keycloak"
+          issuerEndpoint: "https://client-manager:[replace-client-credentials]@[replace-issuer-endpoint]"
+          authenticationFlow:
+            standardFlowEnabled: false
+            implicitFlowEnabled: true
+            serviceAccountsEnabled: true
+            directAccessGrantsEnabled: false
+          jwtClaimWithClientID: "azp"
+          jwtClaimWithClientIDType: "plain"
+          credentials: "headers"
+  applicationPlans:
+    basic:
+      name: "Globex Basic Mobile Plan"
+      setupFee: "0"
+      published: true
+    premium:
+      name: "Globex Basic Premium Plan"
+      setupFee: "100"
+      published: true
+  backendUsages:
+    globex-mobile-gateway-backend:
+      path: /</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the <strong>Import YAML</strong> textarea, replace the placeholders <code>[replace-client-credentials]</code> and <code>[replace-issuer-endpoint]</code>. Update the 2 values as directed below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>[replace-client-credentials]</strong> : Value of Client Credentials of the <strong>client-manager</strong> client you created in Red Hat SSO in the previous step.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you don&#8217;t have this value, click on Red Hat  <a href="https://sso.%SUBDOMAIN%/auth/admin/globex/console/#/realms/globex/clients" target="sso">SSO Clients List</a>. Login if needed with <strong>(user1/openshift)</strong>. Click on the Client ID <strong>client-manager</strong>. You can copy the credentials from the <strong>Credentials tab</strong></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/client-manager-credentials.png" alt="client manager credentials">
+</div>
+</div>
+</li>
+<li>
+<p><strong>[replace-issuer-endpoint]</strong> : Value as below</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">sso.%SUBDOMAIN%/auth/realms/globex</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This URL is from Red Hat SSO&#8217;s <strong>Issuer endpoint</strong> from <a href="https://sso.%SUBDOMAIN%/auth/realms/globex/.well-known/openid-configuration" target="_blank" rel="noopener">well-known configurations endpoint</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/sso-issuer-endpoint.png" alt="sso issuer endpoint">
+</div>
+<div class="title">Figure 25. Red Hat SSO Issuer URL</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The YAML file should looks like this now<br></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-product-gateway-product-issuerendpoint.png" alt="mobile product gateway product issuerendpoint">
+</div>
+<div class="title">Figure 26. mobile-gateway-product.yaml updated with the correct values</div>
+</div>
+</li>
+<li>
+<p>Click the  <strong>Create</strong> button.</p>
+</li>
+<li>
+<p>Note that a 3scale Product has been created. Under the <strong>Conditions</strong> Section note that <strong>Type</strong>, <strong>Synced</strong> has the <strong>Status</strong> as <code>true</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/import-product-created.png" alt="import product created" width="75%">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_active_doc_for_mobile_gateway"><a class="anchor" href="#_create_active_doc_for_mobile_gateway"></a><a class="link" href="#_create_active_doc_for_mobile_gateway">6.3.3. Create Active Doc for Mobile Gateway</a></h4>
+<div class="paragraph">
+<p>You will now create an Active Doc for the 3scale Product</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>From the OpenShift Console, click on the <code>+</code> button show on top-right corner of the portal as show below. Make sure that the project is selected is <code>globex-apim-user1</code></p>
+</li>
+<li>
+<p>Copy the content below and paste in the "Import YAML" form you opened in the previous step.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">kind: ActiveDoc
+apiVersion: capabilities.3scale.net/v1beta1
+metadata:
+  name: mobile-gateway-activedoc
+spec:
+  activeDocOpenAPIRef:
+    url: "https://service-registry-apim.%SUBDOMAIN%/apis/registry/v2/groups/globex/artifacts/mobileapi"
+  published: true
+  name: mobile-gateway-activedoc
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  productSystemName: globex-mobile-gateway-product</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Create</strong> button.</p>
+</li>
+<li>
+<p>You can see that the <strong>Type</strong> under Conditions section <strong>Ready</strong> is marked as <strong>True</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/activedoc-created.png" alt="activedoc created">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_mobile_users"><a class="anchor" href="#_setup_mobile_users"></a><a class="link" href="#_setup_mobile_users">6.4. Setup Mobile users</a></h3>
+<div class="paragraph">
+<p>The Mobile developers of Globex will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which need to go through an approval process</p>
+</div>
+<div class="paragraph">
+<p>For the purpose of this workshop let us setup a couple of users.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>From the OpenShift Console, click on the <code>+</code> button show on top-right corner of the portal as show below. Make sure that the project is selected is <code>globex-apim-user1</code></p>
+</li>
+<li>
+<p>Copy the content below and paste in the "Import YAML" form you opened in the previous step.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">apiVersion: v1
+kind: Secret
+metadata:
+  name: mobileuser.secret
+type: Opaque
+stringData:
+  password: openshift
+---
+apiVersion: capabilities.3scale.net/v1beta1
+kind: DeveloperAccount
+metadata:
+  name: mobile-developeraccount
+spec:
+  orgName: GlobexMobile
+  providerAccountRef:
+    name: 3scale-tenant-secret
+---
+apiVersion: capabilities.3scale.net/v1beta1
+kind: DeveloperUser
+metadata:
+  name: admin.mobile
+spec:
+  username: admin.mobile
+  email: admin@mobile.com
+  passwordCredentialsRef:
+    name: mobileuser.secret
+  role: admin
+  developerAccountRef:
+    name: mobile-developeraccount
+  providerAccountRef:
+    name: 3scale-tenant-secret
+---
+apiVersion: capabilities.3scale.net/v1beta1
+kind: DeveloperUser
+metadata:
+  name: dev.mobile
+spec:
+  username: dev.mobile
+  email: dev@globex.com
+  passwordCredentialsRef:
+    name: mobileuser.secret
+  role: member
+  developerAccountRef:
+    name: mobile-developeraccount
+  providerAccountRef:
+    name: 3scale-tenant-secret</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You will be notified that the user resources have been created successfully</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dev-resources-created.png" alt="dev resources created" width="60%">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_view_the_newly_created_backend_product_activedoc_and_users"><a class="anchor" href="#_view_the_newly_created_backend_product_activedoc_and_users"></a><a class="link" href="#_view_the_newly_created_backend_product_activedoc_and_users">6.5. View the newly created Backend, Product, ActiveDoc and Users</a></h3>
+<div class="paragraph">
+<p>In this step you will view all the resources (Backend, Product, ActiveDoc and Users) that you&#8217;ve created so far on 3scale API Management.</p>
+</div>
+<div class="sect3">
+<h4 id="_view_on_3scale_admin_console"><a class="anchor" href="#_view_on_3scale_admin_console"></a><a class="link" href="#_view_on_3scale_admin_console">6.5.1. View on 3scale admin console</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the <a href="https://3scale-user1-admin.%SUBDOMAIN%" target="3scale">3scale admin portal</a> and login using your username and password <code>(user1/openshift)</code>.</p>
+</li>
+<li>
+<p>You will notice that the Mobile Product and Backend have been created.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-mobile-3scale-login.png" alt="apim mobile 3scale login">
+</div>
+<div class="title">Figure 27. Launch 3scale</div>
+</div>
+</li>
+<li>
+<p>Click on <strong>globex-mobile-gateway-product</strong> under <strong>APIs &#8594; Products</strong> section.</p>
+</li>
+<li>
+<p>You are presented with the Product overview page for the Mobile API Product you created. Note the following elements</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Published Application Plans</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Application Plans define the different sets of access rights you might want to allow for consumers of your API. These can determine anything from rate limits, which methods or resources are accessible and which features are enabled</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Backend that has been attached to the Mobile Gateway Product</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-product-overview.png" alt="mobile product overview">
+</div>
+<div class="title">Figure 28. Mobile Gateway Product: Overview</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Navigate to <strong>Integration &#8594; Settings</strong> page from the Product overview page. You will notice that the Product has been setup with</p>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenID Connect as Authentication mechanism</p>
+</li>
+<li>
+<p><strong>client_manager</strong> client details that you had created in the previous steps.</p>
+</li>
+<li>
+<p>OIDC Authorization Flow includes <strong>Implicit Flow</strong> because we would be authenticating the users SSO as well access to the backend services</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-product-openid-settings.png" alt="mobile product openid settings">
+</div>
+<div class="title">Figure 29. Mobile Gateway Product: Settings</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The ActiveDoc is visible from the 3scale portal as well under Products. Click on the ActiveDoc to preview the OpenAPI specifications.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim_3scale_activedoc.png" alt="apim 3scale activedoc">
+</div>
+<div class="title">Figure 30. Mobile Gateway Product: ActiveDoc</div>
+</div>
+</li>
+<li>
+<p>Navigate to <code>Integration &#8594; Configuration</code> and click on the <strong>Promote to v.x Staging APICast</strong> and then <strong>Promote to v.x Production APICast</strong> to promote all the config changes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>APIcast is an NGINX based API gateway used to integrate internal and external API services with the 3scale. APIcast can be hosted or self-managed. In this workshop we use the default <code>self-managed</code> option.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-promote-apicast.png" alt="mobile promote apicast">
+</div>
+<div class="title">Figure 31. Promote Staging and Production APICast</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_globex_dev_portal"><a class="anchor" href="#_setup_globex_dev_portal"></a><a class="link" href="#_setup_globex_dev_portal">6.6. Setup Globex Dev Portal</a></h3>
+<div class="paragraph">
+<p>A good developer portal is a must have to assure adoption of your API. In this section we will setup the Dev Portal so that it is ready to be used by Mobile Developers.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <code>3scale&#8217;s Audience &#8594;Developer Portal &#8594; Settings</code> by clicking on <a href="https://3scale-user1-admin.%SUBDOMAIN%/site/dns" target="3scale">Settings &#8594; Domains &amp; Access section</a></p>
+</li>
+<li>
+<p>The <strong>Developer Portal Access Code</strong> hides the site from the world till you are ready.</p>
+</li>
+<li>
+<p>Remove the value in the textfield below the label <strong>Developer Portal Access Code</strong> as shown below. Click on the <strong>Update Account</strong> button. This opens up the Developer Portal to public access without the need for an Access Code.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim_domain_access.png" alt="apim domain access">
+</div>
+<div class="title">Figure 32. Remove Developer Portal Access Code</div>
+</div>
+</li>
+<li>
+<p>The next step is to allow a Developer to access <strong>Multiple APIs (Services)</strong> and signup for <strong>Multiple Applications</strong></p>
+</li>
+<li>
+<p>Navigate to <a href="https://3scale-user1-admin.%SUBDOMAIN%/p/admin/cms/switches" target="3scale">Developer Portal &#8594; Feature Visibility section</a></p>
+</li>
+<li>
+<p>Click on the <strong>Show</strong> button against the features <strong>Multiple Services</strong> and <strong>Multiple Applications</strong>. The changes are auto-saved.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim_feature_visbility_init.png" alt="apim feature visbility init">
+</div>
+<div class="title">Figure 33. Feature Visibility section</div>
+</div>
+</li>
+<li>
+<p>After updating the settings, this page should be seen as per the screenshot below.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim_feature_visibility.png" alt="apim feature visibility">
+</div>
+<div class="title">Figure 34. Feature Visibility settings altered</div>
+</div>
+</li>
+<li>
+<p>The Globex Developer Portal is fully setup now for Mobile developers to signup.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sign_up_as_a_mobile_developer"><a class="anchor" href="#_sign_up_as_a_mobile_developer"></a><a class="link" href="#_sign_up_as_a_mobile_developer">6.7. Sign up as a Mobile Developer</a></h3>
+<div class="paragraph">
+<p>In this section you will login as a Mobile Developer (as the user you created in the previous section), and signup for API access</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch the Globex Developer Portal by clicking on <a href="https://3scale-user1.%SUBDOMAIN%" target="devportal">Developer Portal</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal.png" alt="3scale dev portal">
+</div>
+<div class="title">Figure 35. Developer Portal</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>SIGN IN</strong> link found on top-right.</p>
+</li>
+<li>
+<p>Sign in as one of the user you created in the previous section with</p>
+<div class="ulist">
+<ul>
+<li>
+<p>username: <code>dev.mobile</code></p>
+</li>
+<li>
+<p>password: <code>openshift</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal_signin.png" alt="3scale dev portal signin" width="70%">
+</div>
+<div class="title">Figure 36. Developer Portal</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Navigate to Applications Listing by choosing the <strong>APPLICATIONS</strong> menu on the top of the page.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal_loggedin.png" alt="3scale dev portal loggedin" width="80%">
+</div>
+<div class="title">Figure 37. Developer Portal Landing Page</div>
+</div>
+</li>
+<li>
+<p>In the Applications page you are invited to <strong>Create Application</strong>. Click on the <strong>Create new application</strong> button seen against <code>globex-mobile-gateway-product</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal_applications.png" alt="3scale dev portal applications" width="70%">
+</div>
+<div class="title">Figure 38. Developer Portal: Create new application</div>
+</div>
+</li>
+<li>
+<p>Click on <strong>Subscribe to globex-mobile-gateway-product</strong> link</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-mobile-subscribe.png" alt="apim devportal mobile subscribe">
+</div>
+<div class="title">Figure 39. Subscribe to globex-mobile-gateway-product</div>
+</div>
+</li>
+<li>
+<p>You are successfully subscribed to the service</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-mobile-subscribe-success.png" alt="apim devportal mobile subscribe success" width="70%">
+</div>
+<div class="title">Figure 40. Successfully subscribed to the service</div>
+</div>
+</li>
+<li>
+<p>Navigate back to the <strong>APPLICATIONS tab</strong> found on the top menu and click <strong>globex-mobile-gateway-product&#8217;s</strong> &gt; <strong>Create new application</strong> link<br></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3scale_dev_portal_applications.png" alt="3scale dev portal applications" width="70%">
+</div>
+<div class="title">Figure 41. Developer Portal: Create new application (again)</div>
+</div>
+</li>
+<li>
+<p>Give the plan a <strong>Name</strong> and a <strong>Description</strong> and click on <strong>Create Application</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-mobile-create-new-app-2.png" alt="apim devportal mobile create new app 2" width="70%">
+</div>
+<div class="title">Figure 42. Developer Portal: New application</div>
+</div>
+</li>
+<li>
+<p>An application is created successfully. Make a note of the <strong>Client ID</strong> and <strong>Client Secret</strong>. You will be using this in the Mobile App setup. Scratchpad can be used for this as well.</p>
+</li>
+<li>
+<p>Enter the value asterisk (*) in the <strong>REDIRECT URL</strong> field and click on the <strong>Submit</strong> button. This is to setup the right Redirect URL for OAuth using Red Hat SSO.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In real-life you would never mark this as (*), but provide the correct URL based on your application.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-devportal-mobile-app-success.png" alt="apim devportal mobile app success" width="90%">
+</div>
+<div class="title">Figure 43. Update REDIRECT URL in the Application creates successfully for Mobile User</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Copy the <strong>Client ID</strong> from this page which will be used to setup Mobile App</p>
+</li>
+<li>
+<p>Navigate to OpenShift webconsole to the <a href="https://console-openshift-console.%SUBDOMAIN%/k8s/ns/globex-apim-user1/deployments/globex-mobile/environment" target="_blank" rel="noopener">globex-apim namespace</a>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/globex-mobile-deployment.png" alt="globex mobile deployment">
+</div>
+</div>
+</li>
+<li>
+<p>The following parameters need to updated:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>API_CLIENT_ID</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Paste the <strong>Client ID</strong> from the Developer Portal against the <code>API_CLIENT_ID</code> variable with the <strong>Client ID</strong> the <strong>globex-mobile</strong> Deployment Details page.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>GLOBEX_MOBILE_GATEWAY</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Back in the Developer Portal Click on <strong>DOCUMENTATION</strong> navigation on the top of the page.
+The <strong>Documentation</strong> page displays all the available APIs including the default API as well as <strong>globex-mobile-gateway-product</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dev_portal_mobile_doc.png" alt="dev portal mobile doc" width="80%">
+</div>
+<div class="title">Figure 44. Dev Portal: Documentation Page</div>
+</div>
+</li>
+<li>
+<p>Copy the URL displayed under "Service Endpoint" in <strong>globex-mobile-gateway-product</strong> box and paste it against the <code>GLOBEX_MOBILE_GATEWAY</code> variable.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>SSO_AUTHORITY</strong> and <strong>SSO_REDIRECT_LOGOUT_URI</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Paste the following values for the <strong>SSO_AUTHORITY</strong> and <strong>SSO_REDIRECT_LOGOUT_URI</strong> keys</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSO_AUTHORITY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">https://sso.%SUBDOMAIN%/auth/realms/globex</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSO_REDIRECT_LOGOUT_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">https://globex-mobile-globex-apim-user1.%SUBDOMAIN%/home</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Finally the the <strong>globex-mobile</strong> Deployment Details should look like this. Click on the <strong>Save</strong> button</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-full-env-patch.png" alt="mobile full env patch">
+</div>
+<div class="title">Figure 45. Fully updated mobile-env-patch file</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_update_red_hat_ssos_web_origin_to_match_mobile_app"><a class="anchor" href="#_update_red_hat_ssos_web_origin_to_match_mobile_app"></a><a class="link" href="#_update_red_hat_ssos_web_origin_to_match_mobile_app">6.7.1. Update Red Hat SSO&#8217;s Web Origin to match Mobile App</a></h4>
+<div class="paragraph">
+<p>There is one last step that you need to do before trying out the Mobile App. You need to update the <strong>Web Origin</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to click on <a href="https://sso.%SUBDOMAIN%/auth/admin/globex/console/#/realms/globex/clients" target="sso">Red Hat SSO Clients List</a>. Login if needed with <strong>(globex/openshift)</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rh-sso-mobile-client.png" alt="rh sso mobile client">
+</div>
+<div class="title">Figure 46. Red Hat SSO Clients List for Mobile client</div>
+</div>
+</li>
+<li>
+<p>Click on the new Client ID that was created when you signed up for Mobile Gateway Application</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>[Click to learn] Where do I find this Client ID?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Close to the bottom of this page, you would see the <strong>Web Origins</strong> field.</p>
+</li>
+<li>
+<p>Update this field with the following value and click on <strong>Save</strong></p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://globex-mobile-globex-apim-user1.%SUBDOMAIN%</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim_mobile_sso_weborigin.png" alt="apim mobile sso weborigin">
+</div>
+<div class="title">Figure 47. Update Web Origin in Red Hat SSO&#8217;s new Client ID, and click on Save.</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_section_outcome_2"><a class="anchor" href="#_section_outcome_2"></a><a class="link" href="#_section_outcome_2">6.8. Section Outcome</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>3scale Backend, Product, ActiveDocs and Users were created</p>
+</li>
+<li>
+<p>Developer Portal was setup for public access without Access Code</p>
+</li>
+<li>
+<p>Signed for an Application as a Mobile Developer</p>
+</li>
+<li>
+<p>Patched Red Hat SSO Web Origin so that the calls from Globex Mobile App will not cause errors</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_mobile_application"><a class="anchor" href="#_test_mobile_application"></a><a class="link" href="#_test_mobile_application">7. Test Mobile Application</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous section, you signed up for access as a Mobile Developer and gained credentials to access the Globex Mobile Gateway API. In this section you will complete Mobile App configuration and test this out</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>As part of this workshop, you will use a mobile-friendly Angular App and not a mobile-native app. So no mobile app installation is necessary. This Mobile App is work in progress and at present shows only categories and products within each category.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open this <a href="https://chart.googleapis.com/chart?cht=qr&amp;chl=https://globex-mobile-globex-apim-user1.%SUBDOMAIN%&amp;chs=200x200" target="_blank" rel="noopener">QR Code Link</a> to view the QR Code and scan using your mobile phone to access the Mobile App</p>
+</li>
+<li>
+<p>Alternatively, open this URL in <strong>Incognito Mode</strong> to view <a href="https://globex-mobile-globex-apim-user1.%SUBDOMAIN%" target="_blank" rel="noopener">Globex Mobile</a>. This is to ensure that there is no clash with previous logins to RH-SSO.</p>
+</li>
+<li>
+<p>Click on Login, and login using <code>(asilva/openshift)</code></p>
+</li>
+<li>
+<p>The login process may take a few seconds. Please wait for bit :)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-mobile-loggedin.png" alt="apim mobile loggedin" width="40%">
+</div>
+<div class="title">Figure 48. User is logged in</div>
+</div>
+</li>
+<li>
+<p>After logging in, click on the <strong>View the categories</strong> button. You will view on a list of Categories available</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile-categories.png" alt="mobile categories" width="40%">
+</div>
+<div class="title">Figure 49. Categories view</div>
+</div>
+</li>
+<li>
+<p>Click on the 'Clothing' category to view the Product Listing.</p>
+</li>
+<li>
+<p>Try out a few more categories too which will help us to generate some traffic to view in the Analytics section.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_analytics"><a class="anchor" href="#_analytics"></a><a class="link" href="#_analytics">7.1. Analytics</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the <a href="https://3scale-user1.%SUBDOMAIN%/buyer/stats" target="devportal">Globex Developer Portal Statistics</a></p>
+</li>
+<li>
+<p>From the dropdown indicated in this screenshot, choose the Mobile Gateway API&#8217;s application plan (which is  <code>basic-plan</code> in this case).</p>
+</li>
+<li>
+<p>You will be presented with the statistics graph of the calls made to this gateway by the Partner Developer&#8217;s access.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/apim-mobile-analytics.png" alt="apim mobile analytics">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_under_the_hood"><a class="anchor" href="#_under_the_hood"></a><a class="link" href="#_under_the_hood">7.2. Under the hood</a></h3>
+<div class="paragraph">
+<p>As part of this Section you tried out the Mobile App.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user <strong>asilva</strong> you logged into the Mobile App as, is authenticated using Red Hat SSO.</p>
+</li>
+<li>
+<p>Once the user logs in, a token is generated by Red Hat SSO using the Client ID, SSO Authority details that you passed to the Mobile App to setup the configuration</p>
+</li>
+<li>
+<p>This token is authenticated by 3scale to ensure the Client ID indeed has access to that particular API</p>
+</li>
+<li>
+<p>The token is also passed onto the backend service running on OpenShift, which checks for validity of the token.</p>
+</li>
+<li>
+<p>The <a href="https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway/blob/main/src/main/java/org/globex/gateway/mobile/rest/MobileCatalogResource.java" target="code-samples">REST endpoints</a> is supplied with the SSO URL information as part of the <a href="https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway/blob/main/src/main/resources/application.properties" target="code-samples">application.properties</a></p>
+</li>
+<li>
+<p>The endpoints are protected with @Authenticated which in this case looks for a valid token being present.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mobile_rest_java.png" alt="mobile rest java" width="80%">
+</div>
+<div class="title">Figure 50. REST endpoint is annotated with @Authenticated</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With that we wrap up the activities <strong>Design, Govern, Manage, Secure</strong> Globex Mobile Gateway APIs for access from the Mobile Application securely.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_congratulations"><a class="anchor" href="#_congratulations"></a><a class="link" href="#_congratulations">8. Congratulations</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With this you have completed the <strong>Contract First API Advanced</strong> workshop!</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="02-architecture.html" class="query-params-link">2. Architecture</a></span>
-  <span class="next"><a href="04-workshop.html" class="query-params-link">4. Workshop</a></span>
+  <span class="next"><a href="developer-resources.html" class="query-params-link">4. Developer Resources</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
